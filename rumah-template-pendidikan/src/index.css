@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+/* =============================================
+   DARK MODE — Tailwind v4 class strategy
+   ============================================= */
+@variant dark (&:where(.dark, .dark *));
+
+/* =============================================
+   BASE RESET & GLOBAL
+   ============================================= */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  @apply bg-white text-slate-800 transition-colors duration-300;
+}
+
+.dark body, body.dark {
+  background-color: #080D1C;
+  color: #E2E8F0;
+}
+
+/* =============================================
+   DESIGN TOKENS — CSS Variables
+   ============================================= */
+:root {
+  --surface-base: #ffffff;
+  --surface-soft: #f8fafc;
+  --surface-muted: #f1f5f9;
+  --surface-dark: #080D1C;
+  --surface-dark-card: #111827;
+  --surface-dark-soft: #172033;
+  --text-primary: #0f172a;
+  --text-muted: #64748b;
+  --text-dark-primary: #f8fafc;
+  --text-dark-muted: #94a3b8;
+  --accent-blue: #2563eb;
+  --accent-indigo: #4f46e5;
+}
+
+/* =============================================
+   KEYFRAMES
+   ============================================= */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes float-sm {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes line-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* =============================================
+   SCROLL REVEAL UTILITIES — Progressive Enhancement
+   
+   PRINSIP: Tanpa JS → konten tetap terlihat.
+   Animasi hanya aktif ketika .js-reveal-ready ada di <html>.
+   Saat observer gagal / reduced motion → konten tetap visible.
+   ============================================= */
+
+/* Tanpa .js-reveal-ready: semua visible (no-JS safe fallback) */
+.reveal-up,
+.reveal-left,
+.reveal-right,
+.reveal-scale,
+.reveal-item,
+.reveal-fade {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Hanya aktifkan animation state ketika JS telah siap */
+.js-reveal-ready .reveal-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-reveal-ready .reveal-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-reveal-ready .reveal-right {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-reveal-ready .reveal-scale {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-reveal-ready .reveal-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-reveal-ready .reveal-fade {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* State: revealed */
+.js-reveal-ready .is-revealed {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+/* Reduced motion — selalu visible, hapus semua animasi */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-item, .reveal-fade,
+  .js-reveal-ready .reveal-up, .js-reveal-ready .reveal-left, .js-reveal-ready .reveal-right,
+  .js-reveal-ready .reveal-scale, .js-reveal-ready .reveal-item, .js-reveal-ready .reveal-fade {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  [class*="animate-"] {
+    animation: none !important;
+  }
+}
+
+
+/* =============================================
+   MICRO-INTERACTIONS
+   ============================================= */
+.btn-micro {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-micro:hover {
+  transform: translateY(-2px);
+}
+.btn-micro:active {
+  transform: translateY(0);
+}
+
+.card-micro {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+.card-micro:hover {
+  transform: translateY(-3px);
+}
+
+/* =============================================
+   UTILITY CLASSES
+   ============================================= */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Glass effect */
+.glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Premium gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle grid pattern */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(148,163,184,0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148,163,184,0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
