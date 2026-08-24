@@ -38,6 +38,38 @@ export const templatesData = [
     keyFeatures: ["Treatment Gallery", "Virtual Consultation Modal"],
     targetAction: "External Hosting URL",
     image: "https://images.unsplash.com/photo-1512496015851-a1c8485f4039?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    id: "tpl-06",
+    kategori: "Klinik",
+    namaTemplate: "Clinic Care Modern",
+    keyFeatures: ["Booking Online", "Doctor Profile", "Layanan"],
+    targetAction: "External Hosting URL",
+    image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    id: "tpl-07",
+    kategori: "Dokter",
+    namaTemplate: "Doctor Personal Brand",
+    keyFeatures: ["Jadwal Praktek", "Konsultasi Online", "Artikel"],
+    targetAction: "External Hosting URL",
+    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    id: "tpl-08",
+    kategori: "Dental",
+    namaTemplate: "Dental Smile Studio",
+    keyFeatures: ["Treatment Gallery", "Appointment", "Testimonials"],
+    targetAction: "External Hosting URL",
+    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    id: "tpl-09",
+    kategori: "Wellness",
+    namaTemplate: "Zen Wellness Center",
+    keyFeatures: ["Yoga Classes", "Spa Booking", "Health Tips"],
+    targetAction: "External Hosting URL",
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800",
   }
 ];
 
@@ -47,5 +79,9 @@ export const categories = [
   "Rumah Sakit",
   "Dokter Gigi",
   "Apotek",
-  "Lab & Estetika"
+  "Lab & Estetika",
+  "Klinik",
+  "Dokter",
+  "Dental",
+  "Wellness"
 ];

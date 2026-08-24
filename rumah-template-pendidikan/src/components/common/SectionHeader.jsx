@@ -11,11 +11,11 @@ const SectionHeader = ({ eyebrow, title, description, className = '' }) => {
           </span>
         </div>
       )}
-      <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-50 tracking-tight leading-tight">
+      <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-slate-50 tracking-tight leading-tight">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 max-w-2xl mx-auto text-base text-slate-500 dark:text-slate-400 leading-relaxed">
+        <p className="mt-3 max-w-2xl mx-auto text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
           {description}
         </p>
       )}

@@ -1,28 +1,34 @@
 import React, { useRef, useEffect, useState } from 'react';
 import SectionHeader from '../common/SectionHeader';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
-import { ArrowRight, MessageCircle, Monitor } from 'lucide-react';
+import { LayoutTemplate, PlayCircle, MessageSquare, Rocket } from 'lucide-react';
 
 const STEPS = [
   {
     num: '01',
-    title: 'Eksplorasi Katalog',
-    desc: 'Jelajahi koleksi desain yang dirancang khusus untuk memenuhi standar visual institusi pendidikan modern.',
-    icon: <Monitor size={18} className="text-slate-400" />
+    title: 'Konsultasi',
+    desc: 'Diskusikan visi, target, dan kebutuhan spesifik institusi pendidikan Anda bersama tim ahli kami.',
+    icon: <MessageSquare size={20} className="text-blue-500" />
   },
   {
     num: '02',
-    title: 'Live Preview Interaktif',
-    desc: 'Uji coba langsung tata letak, warna, dan responsivitas desain dari berbagai perangkat sebelum memutuskan.',
-    icon: <ArrowRight size={18} className="text-blue-500" />,
-    highlight: true
+    title: 'Tentukan Kebutuhan',
+    desc: 'Pilih struktur, fitur, dan referensi desain dari katalog kami yang paling sesuai dengan target Anda.',
+    icon: <LayoutTemplate size={20} className="text-indigo-500" />
   },
   {
     num: '03',
-    title: 'Konsultasi Akhir',
-    desc: 'Hubungi tim kami via WhatsApp untuk berdiskusi mengenai implementasi desain pada website institusi Anda.',
-    icon: <MessageCircle size={18} className="text-emerald-500" />
+    title: 'Desain & Pengembangan',
+    desc: 'Tim kami mulai merancang UI/UX dan mendevelop website dengan standar performa dan keamanan tinggi.',
+    icon: <PlayCircle size={20} className="text-amber-500" />
   },
+  {
+    num: '04',
+    title: 'Website Siap Digunakan',
+    desc: 'Website Anda dirilis ke publik, responsif di semua perangkat, dan siap mendukung pertumbuhan institusi.',
+    icon: <Rocket size={20} className="text-emerald-500" />,
+    highlight: true
+  }
 ];
 
 const CaraKerjaSection = () => {
@@ -40,66 +46,65 @@ const CaraKerjaSection = () => {
   }, []);
 
   return (
-    <section id="cara-kerja" className="py-16 lg:py-24 bg-white dark:bg-[#080D1C]" ref={revealRef}>
+    <section id="cara-kerja" className="py-10 lg:py-14 bg-white dark:bg-[#080D1C]" ref={revealRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="reveal-up">
+        <div className="reveal-up text-center mb-8 lg:mb-10">
           <SectionHeader
             eyebrow="Workflow"
-            title="Sederhana & Transparan"
-            description="Tidak perlu bingung membayangkan hasil akhir. Kami buat prosesnya sangat mudah untuk Anda."
-            className="mb-16 lg:mb-24"
+            title="Cara Kerja Sederhana & Transparan"
+            description="Tidak perlu bingung membayangkan hasil akhir. Kami rancang prosesnya agar sangat mudah diikuti."
           />
         </div>
 
-        <div className="relative max-w-5xl mx-auto" ref={lineRef}>
-          {/* Connecting line — Desktop (Horizontal) */}
-          <div className="hidden md:block absolute top-6 left-[calc(16.66%+24px)] right-[calc(16.66%+24px)] h-[2px] bg-slate-100 dark:bg-slate-800 z-0 overflow-hidden rounded-full">
+        <div className="relative max-w-6xl mx-auto" ref={lineRef}>
+          {/* Connecting line — Desktop (Horizontal 4 cols) */}
+          <div className="hidden lg:block absolute top-6 left-[calc(12.5%+28px)] right-[calc(12.5%+28px)] h-[2px] bg-slate-100 dark:bg-slate-800 z-0 overflow-hidden rounded-full">
             <div
-              className="h-full bg-gradient-to-r from-slate-300 via-blue-400 to-emerald-400 dark:from-slate-600 dark:via-blue-500 dark:to-emerald-500 origin-left transition-transform duration-[1500ms] ease-in-out"
+              className="h-full bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 dark:from-blue-500 dark:via-indigo-500 dark:to-emerald-500 origin-left transition-transform duration-[1500ms] ease-in-out"
               style={{ transform: lineVisible ? 'scaleX(1)' : 'scaleX(0)' }}
             />
           </div>
 
-          {/* Connecting line — Mobile (Vertical) */}
-          <div className="md:hidden absolute top-[40px] bottom-[100px] left-[27px] w-[2px] bg-slate-100 dark:bg-slate-800 z-0 overflow-hidden rounded-full">
+          {/* Connecting line — Mobile/Tablet (Vertical) */}
+          <div className="lg:hidden absolute top-[30px] bottom-[100px] left-[39px] sm:left-[43px] w-[2px] bg-slate-100 dark:bg-slate-800 z-0 overflow-hidden rounded-full">
             <div
-              className="w-full h-full bg-gradient-to-b from-slate-300 via-blue-400 to-emerald-400 dark:from-slate-600 dark:via-blue-500 dark:to-emerald-500 origin-top transition-transform duration-[1500ms] ease-in-out"
+              className="w-full bg-gradient-to-b from-blue-400 via-indigo-400 to-emerald-400 dark:from-blue-500 dark:via-indigo-500 dark:to-emerald-500 origin-top transition-transform duration-[1500ms] ease-in-out"
               style={{ transform: lineVisible ? 'scaleY(1)' : 'scaleY(0)' }}
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 relative z-10">
-            {STEPS.map((step, i) => (
+          {/* Steps Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-6">
+            {STEPS.map((step, idx) => (
               <div
                 key={step.num}
-                className="reveal-up group flex flex-row md:flex-col items-start gap-5 md:gap-0 text-left"
-                style={{ transitionDelay: `${i * 150}ms` }}
+                className="reveal-up relative z-10 flex flex-row lg:flex-col items-start lg:items-center text-left lg:text-center group"
+                style={{ transitionDelay: `${(idx + 1) * 150}ms` }}
               >
-                {/* Step number bubble */}
+                {/* Number & Icon node */}
                 <div className={`
-                  relative z-10 flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center md:mb-8 text-sm font-bold font-mono shadow-sm
-                  transition-all duration-500
+                  w-10 h-10 lg:w-12 lg:h-12 flex-shrink-0 rounded-2xl flex items-center justify-center mb-0 lg:mb-4 mr-5 lg:mr-0 transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-105 shadow-sm
                   ${step.highlight 
-                    ? 'bg-blue-600 text-white border border-blue-500 shadow-[0_8px_20px_rgba(37,99,235,0.2)] dark:shadow-[0_8px_20px_rgba(37,99,235,0.4)] md:-mt-2' 
-                    : 'bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700/80 text-slate-400 group-hover:border-slate-300 dark:group-hover:border-slate-600'}
+                    ? 'bg-gradient-to-br from-slate-900 to-slate-800 dark:from-blue-600 dark:to-indigo-600 border-none' 
+                    : 'bg-white dark:bg-[#0C1221] border-2 border-slate-100 dark:border-slate-800'
+                  }
                 `}>
-                  {step.num}
+                  {step.highlight ? (
+                    <span className="text-white font-bold text-lg">{step.num}</span>
+                  ) : (
+                    step.icon
+                  )}
                 </div>
 
-                {/* Card */}
-                <div className={`
-                  card-micro w-full rounded-2xl p-6 relative overflow-hidden transition-all duration-300
-                  ${step.highlight 
-                    ? 'bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 shadow-md md:-mt-2' 
-                    : 'bg-transparent border border-transparent group-hover:bg-slate-50/50 dark:group-hover:bg-slate-900/30'}
-                `}>
-                  {step.highlight && (
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 dark:bg-blue-500/10 rounded-bl-full pointer-events-none" />
-                  )}
-                  <h3 className="text-[17px] font-bold text-slate-900 dark:text-slate-100 mb-2.5 flex items-center justify-between">
+                {/* Content */}
+                <div>
+                  <h3 className="text-[15px] font-bold text-slate-900 dark:text-white mb-2 flex items-center lg:justify-center gap-2">
+                    <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${step.highlight ? 'bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-400' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'}`}>
+                      {step.num}
+                    </span>
                     {step.title}
                   </h3>
-                  <p className="text-[14px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                  <p className="text-[13px] text-slate-500 dark:text-slate-400 leading-relaxed max-w-[240px] mx-auto lg:mx-auto">
                     {step.desc}
                   </p>
                 </div>

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Stethoscope, Menu, X } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { WA_LINK } from '../config/site';
 
 export function cn(...inputs) {
   return twMerge(clsx(inputs));
@@ -24,7 +25,9 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Katalog Template', path: '/katalog' },
-    { name: 'Cara Kerja', path: '/#cara-kerja' },
+    { name: 'Mengapa Kami', path: '/#mengapa-kami' },
+    { name: 'Harga', path: '/#harga' },
+    { name: 'Fitur', path: '/#fitur' },
     { name: 'FAQ', path: '/#faq' },
   ];
 
@@ -60,7 +63,7 @@ const Navbar = () => {
             ))}
           </div>
           <a 
-            href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20konsultasi%20gratis%20pembuatan%20website%20kesehatan" 
+            href={WA_LINK('Halo, saya ingin konsultasi gratis pembuatan website kesehatan')} 
             target="_blank" 
             rel="noopener noreferrer"
             className="bg-slate-dark text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-ocean-blue transition-all hover:shadow-lg hover:shadow-ocean-blue/30"
@@ -92,7 +95,7 @@ const Navbar = () => {
             </Link>
           ))}
           <a 
-            href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20konsultasi%20gratis%20pembuatan%20website%20kesehatan" 
+            href={WA_LINK('Halo, saya ingin konsultasi gratis pembuatan website kesehatan')} 
             target="_blank" 
             rel="noopener noreferrer"
             className="bg-ocean-blue text-white text-center py-3 rounded-xl font-semibold mt-2"

@@ -7,7 +7,7 @@ const CtaSection = () => {
   const revealRef = useScrollReveal({ threshold: 0.2 });
 
   return (
-    <section className="py-16 lg:py-24 bg-white dark:bg-[#080D1C] relative px-4" ref={revealRef}>
+    <section className="py-8 lg:py-10 bg-white dark:bg-[#080D1C] relative px-4" ref={revealRef}>
       <div className="max-w-4xl mx-auto reveal-up">
         {/* Main card */}
         <div className="relative bg-slate-900 dark:bg-slate-950 rounded-3xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.15)] group">
@@ -23,31 +23,31 @@ const CtaSection = () => {
           <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none opacity-50 group-hover:opacity-100 transition-all duration-1000 delay-100" />
 
           {/* Content */}
-          <div className="relative z-10 text-center py-16 px-6 sm:px-12 lg:px-20">
+          <div className="relative z-10 text-center py-10 px-6 sm:px-12 lg:px-20">
             {/* Pre-heading */}
-            <div className="reveal-up inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 backdrop-blur-md mb-8 shadow-sm">
+            <div className="reveal-up inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 backdrop-blur-md mb-6 shadow-sm">
               <Sparkles size={14} className="text-blue-400" />
               <span className="text-[11px] font-bold text-blue-300 tracking-[0.2em] uppercase">Mulai Transformasi</span>
             </div>
 
-            <h2 className="reveal-up text-[2rem] md:text-4xl lg:text-[2.75rem] font-bold text-white tracking-tight leading-[1.15] mb-5">
-              Siap Membangun Website<br className="hidden sm:block" />
-              Institusi Pendidikan Anda?
+            <h2 className="reveal-up text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight leading-[1.15] mb-4">
+              Sudah Tahu Website<br className="hidden sm:block" />
+              yang Anda Butuhkan?
             </h2>
-            <p className="reveal-up text-slate-400 text-[15px] md:text-base max-w-lg mx-auto mb-10 leading-relaxed">
+            <p className="reveal-up text-slate-400 text-sm max-w-lg mx-auto mb-8 leading-relaxed">
               Jelajahi template di katalog atau konsultasikan kebutuhan spesifik Anda bersama tim kami sekarang.
             </p>
 
             <div className="reveal-up flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="#katalog"
+                href="#harga"
                 className="
                   btn-micro w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl
                   font-semibold text-[14px] text-slate-300 border border-slate-700 bg-slate-800/60
                   hover:bg-slate-800 hover:text-white hover:border-slate-500 transition-all duration-300 group/btn
                 "
               >
-                Lihat Katalog
+                Lihat Paket
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover/btn:translate-x-1 text-slate-400 group-hover/btn:text-white" />
               </a>
               <a

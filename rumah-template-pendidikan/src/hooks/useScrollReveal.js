@@ -11,7 +11,7 @@ import { useEffect, useRef } from 'react';
  * - Fallback timeout: jika observer belum trigger setelah 2s → force reveal semua
  * - disconnect setelah semua revealed (once mode)
  */
-export function useScrollReveal(options = {}) {
+export function useScrollReveal(options = {}, dependencies = []) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export function useScrollReveal(options = {}) {
       clearTimeout(fallbackTimer);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [...dependencies]);
 
   return ref;
 }

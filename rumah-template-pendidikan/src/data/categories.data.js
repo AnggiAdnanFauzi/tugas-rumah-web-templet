@@ -4,20 +4,16 @@ const categories = [
     label: "Semua",
   },
   {
-    id: "sekolah",
+    id: "school",
     label: "Sekolah",
   },
   {
-    id: "perguruan-tinggi",
-    label: "Perguruan Tinggi",
+    id: "course",
+    label: "Kursus",
   },
   {
-    id: "pesantren",
-    label: "Pesantren",
-  },
-  {
-    id: "kursus-bimbel",
-    label: "Kursus & Bimbel",
+    id: "training",
+    label: "Training",
   },
 ];
 

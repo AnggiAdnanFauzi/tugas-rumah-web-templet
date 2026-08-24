@@ -1,9 +1,11 @@
 import React from 'react';
 import { ExternalLink, MessageCircle, Monitor } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { WA_LINK } from '../config/site';
 
 const TemplateCard = ({ template }) => {
-  const whatsappUrl = `https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Template%20${encodeURIComponent(template.namaTemplate)}`;
+  const whatsappUrl = WA_LINK(`Halo, saya tertarik dengan Template ${template.namaTemplate}`);
+  const demoUrl = template.demoUrl || null;
 
   return (
     <motion.div 
@@ -52,14 +54,22 @@ const TemplateCard = ({ template }) => {
         </div>
 
         <div className="mt-auto grid grid-cols-2 gap-3">
-          <a 
-            href="#" 
-            onClick={(e) => { e.preventDefault(); alert('Demo URL would open here'); }}
-            className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border-2 border-slate-200 text-slate-700 font-semibold hover:border-ocean-blue hover:text-ocean-blue transition-colors"
-          >
-            <ExternalLink size={16} />
-            Live Demo
-          </a>
+          {demoUrl ? (
+            <a 
+              href={demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border-2 border-slate-200 text-slate-700 font-semibold hover:border-ocean-blue hover:text-ocean-blue transition-colors"
+            >
+              <ExternalLink size={16} />
+              Live Demo
+            </a>
+          ) : (
+            <span className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border-2 border-slate-100 text-slate-400 font-semibold cursor-not-allowed text-sm">
+              <ExternalLink size={16} />
+              Demo Soon
+            </span>
+          )}
           <a 
             href={whatsappUrl}
             target="_blank"

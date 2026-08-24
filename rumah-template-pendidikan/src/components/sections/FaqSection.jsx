@@ -13,9 +13,9 @@ const FaqSection = () => {
   const isEmpty = !faqData || faqData.length === 0;
 
   return (
-    <section id="faq" className="py-16 lg:py-24 bg-white dark:bg-[#080D1C]" ref={revealRef}>
+    <section id="faq" className="py-8 lg:py-10 bg-white dark:bg-[#080D1C]" ref={revealRef}>
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
-        <div className="reveal-up text-center mb-16">
+        <div className="reveal-up text-center mb-7">
           <SectionHeader
             eyebrow="FAQ"
             title="Pertanyaan Umum"
@@ -37,7 +37,7 @@ const FaqSection = () => {
                 <div key={i} className="border-b border-slate-200 dark:border-slate-800 group">
                   <button
                     onClick={() => toggle(`empty-${i}`)}
-                    className="w-full flex items-center justify-between py-5 text-left focus:outline-none transition-colors group-hover:bg-slate-50/50 dark:group-hover:bg-slate-900/30 px-2 rounded-t-lg"
+                    className="w-full flex items-center justify-between py-4 text-left focus:outline-none transition-colors group-hover:bg-slate-50/50 dark:group-hover:bg-slate-900/30 px-2 rounded-t-lg"
                   >
                     <div className="flex items-center gap-5">
                       <span className="text-sm font-mono font-bold text-slate-300 dark:text-slate-600 transition-colors group-hover:text-blue-500">0{i + 1}</span>
@@ -46,7 +46,7 @@ const FaqSection = () => {
                     <ChevronDown size={18} className={`text-slate-400 flex-shrink-0 transition-transform duration-300 ${openIndex === `empty-${i}` ? 'rotate-180 text-blue-500' : 'group-hover:text-blue-500'}`} />
                   </button>
                   {openIndex === `empty-${i}` && (
-                    <div className="px-2 pb-6 pl-[44px]">
+                    <div className="px-2 pb-5 pl-[44px]">
                       <div className="flex items-start gap-3 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700/50">
                         <AlertCircle size={16} className="text-slate-400 mt-0.5 flex-shrink-0" />
                         <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -67,7 +67,7 @@ const FaqSection = () => {
                 <button
                   onClick={() => toggle(i)}
                   aria-expanded={openIndex === i}
-                  className="w-full flex items-center justify-between py-5 text-left focus:outline-none transition-colors group-hover:bg-slate-50/50 dark:group-hover:bg-slate-900/30 px-2 rounded-t-lg"
+                  className="w-full flex items-center justify-between py-4 text-left focus:outline-none transition-colors group-hover:bg-slate-50/50 dark:group-hover:bg-slate-900/30 px-2 rounded-t-lg"
                 >
                   <div className="flex items-center gap-5">
                     <span className="text-sm font-mono font-bold text-slate-300 dark:text-slate-600 transition-colors group-hover:text-blue-500">
@@ -83,7 +83,7 @@ const FaqSection = () => {
                   />
                 </button>
                 {openIndex === i && (
-                  <div className="px-2 pb-6 pl-[44px]">
+                  <div className="px-2 pb-5 pl-[44px]">
                     <div className="text-[15px] text-slate-500 dark:text-slate-400 leading-relaxed">
                       {item.answer}
                     </div>

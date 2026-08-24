@@ -1,6 +1,7 @@
 import React from 'react';
 import { generateWaLink } from '../../utils/whatsapp';
-import { MessageCircle, MousePointer2 } from 'lucide-react';
+import { MessageCircle, MousePointer2, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 /* 
   TemplateGrid — Phase 7.8 Final
@@ -8,9 +9,9 @@ import { MessageCircle, MousePointer2 } from 'lucide-react';
 */
 
 const EmptyState = () => (
-  <div className="flex flex-col items-center py-12 px-6">
+  <div className="flex flex-col items-center py-8 px-6">
     {/* Visual Storytelling: Assembly Process */}
-    <div className="relative w-full max-w-[420px] h-[300px] mb-12 flex justify-center perspective-[1200px]">
+    <div className="relative w-full max-w-[340px] h-[200px] mb-6 flex justify-center perspective-[1200px]">
       
       {/* 1. Back Layer: Blueprint/Wireframe */}
       <div className="absolute inset-0 bg-slate-50 dark:bg-[#0C1221] border-2 border-dashed border-slate-300/80 dark:border-slate-700/60 rounded-2xl opacity-60 dark:opacity-40"
@@ -87,10 +88,10 @@ const EmptyState = () => (
     </div>
 
     {/* Text */}
-    <h3 className="text-[22px] font-bold text-slate-900 dark:text-slate-100 mb-2.5 tracking-tight text-center">
+    <h3 className="text-[18px] font-bold text-slate-900 dark:text-slate-100 mb-2 tracking-tight text-center">
       Katalog Sedang Dirakit
     </h3>
-    <p className="text-[15px] text-slate-500 dark:text-slate-400 max-w-md mx-auto text-center leading-relaxed mb-8">
+    <p className="text-[13px] text-slate-500 dark:text-slate-400 max-w-sm mx-auto text-center leading-relaxed mb-5">
       Sistem kami sedang memproses dan menyiapkan koleksi template berkualitas agar siap Anda eksplorasi.
     </p>
 
@@ -122,8 +123,59 @@ const TemplateGrid = ({ templates, selectedCategory }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {templates.map((template, index) => (
-        <div key={template.id || index} className="reveal-scale" style={{ transitionDelay: `${index * 80}ms` }}>
-          {/* Cards */}
+        <div key={template.id || index} className="reveal-scale group flex flex-col bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300" style={{ transitionDelay: `${index * 80}ms` }}>
+          {/* Card Image Area */}
+          <div className="relative aspect-[16/10] bg-slate-100 dark:bg-slate-800/50 overflow-hidden border-b border-slate-100 dark:border-slate-800">
+            {template.thumbnail ? (
+              <img src={template.thumbnail} alt={template.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            ) : (
+              <div className="w-full h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 gap-3">
+                <LayoutTemplate size={32} />
+                <span className="text-xs font-semibold uppercase tracking-widest">Preview</span>
+              </div>
+            )}
+            
+            {/* Badges */}
+            <div className="absolute top-4 left-4 flex flex-col gap-2">
+              <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white bg-slate-900/80 backdrop-blur-md rounded-full border border-white/10 shadow-sm">
+                {template.categoryLabel || template.category}
+              </span>
+            </div>
+            
+            {/* Hover Actions */}
+            <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+              {template.demoUrl && template.demoUrl !== '#' ? (
+                <a href={template.demoUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white text-xs font-semibold rounded-full hover:bg-blue-500 hover:scale-105 transition-all duration-300 shadow-lg">
+                  Lihat Demo
+                </a>
+              ) : (
+                <span className="px-4 py-2 bg-slate-800/80 text-slate-300 text-xs font-semibold rounded-full cursor-not-allowed border border-slate-700/50">
+                  Preview Segera Tersedia
+                </span>
+              )}
+            </div>
+          </div>
+          
+          {/* Card Content Area */}
+          <div className="p-4 lg:p-5 flex flex-col flex-1">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1.5 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              {template.title}
+            </h3>
+            <p className="text-[13px] text-slate-500 dark:text-slate-400 leading-relaxed mb-4 flex-1">
+              {template.description}
+            </p>
+            
+            {/* Action Bar */}
+            <div className="pt-4 border-t border-slate-100 dark:border-slate-800/80 mt-auto flex items-center justify-between">
+              <a href={generateWaLink()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[13px] font-semibold text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                <MessageCircle size={14} />
+                Konsultasikan
+              </a>
+              <Link to={`/template/${template.slug}`} className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800/50 flex items-center justify-center text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-all">
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
         </div>
       ))}
     </div>

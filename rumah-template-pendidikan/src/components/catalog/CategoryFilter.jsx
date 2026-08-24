@@ -3,9 +3,8 @@ import React, { useState, useRef, useEffect } from 'react';
 const CATEGORIES = [
   { id: 'all', label: 'Semua' },
   { id: 'sekolah', label: 'Sekolah' },
-  { id: 'perguruan-tinggi', label: 'Perguruan Tinggi' },
-  { id: 'pesantren', label: 'Pesantren' },
-  { id: 'kursus', label: 'Kursus & Bimbel' },
+  { id: 'kursus', label: 'Kursus' },
+  { id: 'training', label: 'Training' },
 ];
 
 const CategoryFilter = ({ selectedCategory, onSelectCategory, categories }) => {
@@ -31,7 +30,7 @@ const CategoryFilter = ({ selectedCategory, onSelectCategory, categories }) => {
   }, [selectedCategory, cats]);
 
   return (
-    <div className="flex justify-center mb-10">
+    <div className="flex justify-center mb-6">
       <div
         ref={containerRef}
         className="relative flex items-center gap-0.5 p-1 bg-slate-100 dark:bg-slate-800/60 rounded-xl border border-slate-200/60 dark:border-slate-700/40 overflow-x-auto no-scrollbar"

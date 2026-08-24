@@ -1,107 +1,105 @@
 import React from 'react';
-import SectionHeader from '../common/SectionHeader';
-import { LayoutList, Eye, Zap, MessagesSquare } from 'lucide-react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { Check, ShieldCheck, Zap, Layers, Smartphone } from 'lucide-react';
 
-const FEATURES = [
-  {
-    icon: LayoutList,
-    color: 'text-blue-400',
-    bg: 'bg-blue-500/10',
-    glow: 'group-hover:shadow-[0_4px_20px_rgba(59,130,246,0.05)]',
-    title: 'Katalog Khusus Pendidikan',
-    desc: 'Kami mendedikasikan platform ini hanya untuk institusi pendidikan. Anda tidak perlu membuang waktu mencari dari ribuan template bisnis umum yang tidak relevan dengan kebutuhan sekolah atau kampus Anda.',
-    colSpan: 'md:col-span-2',
-  },
-  {
-    icon: Eye,
-    color: 'text-indigo-400',
-    bg: 'bg-indigo-500/10',
-    glow: 'group-hover:shadow-[0_4px_20px_rgba(99,102,241,0.05)]',
-    title: 'Preview Transparan',
-    desc: 'Evaluasi desain secara live sebelum memutuskan, tanpa ada kejutan atau biaya tersembunyi.',
-    colSpan: '',
-  },
-  {
-    icon: Zap,
-    color: 'text-emerald-400',
-    bg: 'bg-emerald-500/10',
-    glow: 'group-hover:shadow-[0_4px_20px_rgba(16,185,129,0.05)]',
-    title: 'Tampilan Profesional',
-    desc: 'Desain clean, modern, dan memberikan impresi kredibel untuk institusi Anda.',
-    colSpan: '',
-  },
-  {
-    icon: MessagesSquare,
-    color: 'text-amber-400',
-    bg: 'bg-amber-500/10',
-    glow: 'group-hover:shadow-[0_4px_20px_rgba(245,158,11,0.05)]',
-    title: 'Konsultasi Langsung',
-    desc: 'Diskusikan kebutuhan spesifik Anda langsung via WhatsApp tanpa melalui sistem tiket yang lambat.',
-    colSpan: 'md:col-span-2',
-  },
+const proofPoints = [
+  { text: 'Spesialis website pendidikan', icon: <ShieldCheck size={18} /> },
+  { text: 'Struktur halaman khusus institusi', icon: <Layers size={18} /> },
+  { text: 'Desain profesional dan modern', icon: <Zap size={18} /> },
+  { text: 'Dapat dikembangkan sesuai kebutuhan', icon: <Check size={18} /> },
+  { text: 'Fokus pada kemudahan pengunjung', icon: <Smartphone size={18} /> },
 ];
 
 const KenapaKamiSection = () => {
-  const revealRef = useScrollReveal({ threshold: 0.1 });
+  const revealRef = useScrollReveal();
 
   return (
-    <section className="py-16 lg:py-24 bg-[#0A0F1C] text-white relative overflow-hidden" ref={revealRef}>
-      {/* Moving Background texture */}
-      <div 
-        className="absolute inset-0 opacity-40 pointer-events-none"
-        style={{
-          backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)',
-          backgroundSize: '32px 32px',
-          backgroundPosition: '0 0',
-          animation: 'pan-bg 60s linear infinite'
-        }}
-      />
-      {/* Ambient soft light */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/5 blur-[120px] rounded-[100%] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="reveal-up">
-          <SectionHeader
-            eyebrow="Nilai Tambah"
-            title="Mengapa Platform Ini Berbeda?"
-            className="mb-14 lg:mb-20 [&_h2]:text-white [&_div]:border-blue-800/60 [&_div]:bg-blue-950/40 [&_span:first-child]:bg-blue-400 [&_span.text-xs]:text-blue-400"
-          />
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-5 lg:gap-6">
-          {FEATURES.map((f, i) => {
-            const Icon = f.icon;
-            return (
-              <div
-                key={f.title}
-                className={`reveal-up group relative flex flex-col p-7 rounded-2xl border border-slate-800/50 bg-[#111627]/60 backdrop-blur-sm hover:bg-[#151C2D]/80 hover:border-slate-700/80 hover:-translate-y-1 transition-all duration-500 cursor-default ${f.glow} ${f.colSpan}`}
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                {/* Header: Icon + Title */}
-                <div className="flex items-center gap-4 mb-4">
-                  <div className={`w-12 h-12 rounded-xl ${f.bg} flex items-center justify-center group-hover:scale-105 transition-transform duration-500 ease-out`}>
-                    <Icon size={20} className={f.color} strokeWidth={1.5} />
+    <section id="spesialisasi" className="py-10 lg:py-14 bg-slate-50 dark:bg-[#0C1221]" ref={revealRef}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          
+          {/* LEFT: Copy */}
+          <div className="reveal-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-xs lg:text-sm font-semibold mb-4">
+              Mengapa Memilih Kami
+            </div>
+            
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white tracking-tight mb-6 leading-tight">
+              Kami tidak sekadar membuat tampilan website.
+            </h2>
+            
+            <div className="pl-6 border-l-4 border-indigo-500 dark:border-indigo-400 mb-8">
+              <p className="text-base md:text-lg font-medium text-slate-700 dark:text-slate-300 italic">
+                "Kami memahami bahwa struktur informasi, pengalaman pengguna, dan performa website pendidikan berbeda dari website biasa."
+              </p>
+            </div>
+            
+            <div className="space-y-3">
+              {proofPoints.map((point, idx) => (
+                <div key={idx} className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center text-indigo-600 dark:text-indigo-400 flex-shrink-0">
+                    {point.icon}
                   </div>
-                  <h3 className="text-lg font-bold text-slate-100 group-hover:text-white transition-colors">{f.title}</h3>
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">
+                    {point.text}
+                  </span>
                 </div>
+              ))}
+            </div>
+            
+            <div className="mt-8">
+              <a 
+                href="#cara-kerja"
+                className="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-semibold hover:gap-3 transition-all"
+              >
+                Pelajari cara kerja kami
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
 
-                <p className="text-[15px] text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">{f.desc}</p>
-
-                {/* Subtle Hover accent line */}
-                <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-slate-700/30 to-transparent group-hover:via-blue-500/30 transition-colors duration-500" />
+          {/* RIGHT: UI Visual / Statement */}
+          <div className="reveal-right relative">
+            <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-blue-500/10 rounded-3xl transform rotate-3 scale-105 pointer-events-none"></div>
+            <div className="relative bg-white dark:bg-[#111827] rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl p-6 lg:p-8 overflow-hidden">
+              
+              {/* Abstract UI representation */}
+              <div className="w-full h-8 bg-slate-100 dark:bg-slate-800/50 rounded-lg mb-6 flex items-center px-4 gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                <div className="w-3 h-3 rounded-full bg-amber-400"></div>
+                <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
               </div>
-            );
-          })}
+              
+              <div className="grid grid-cols-3 gap-3 mb-6">
+                <div className="col-span-1 h-24 bg-slate-100 dark:bg-slate-800/50 rounded-xl"></div>
+                <div className="col-span-2 h-24 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl border border-indigo-100 dark:border-indigo-800/30"></div>
+              </div>
+              
+              <div className="h-4 w-3/4 bg-slate-100 dark:bg-slate-800/50 rounded mb-4"></div>
+              <div className="h-4 w-1/2 bg-slate-100 dark:bg-slate-800/50 rounded mb-8"></div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="h-12 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800/30 flex items-center px-4">
+                  <div className="w-4 h-4 rounded bg-blue-500/50"></div>
+                  <div className="w-16 h-2 bg-blue-500/30 ml-3 rounded"></div>
+                </div>
+                <div className="h-12 bg-slate-50 dark:bg-slate-800/30 rounded-lg flex items-center px-4">
+                  <div className="w-4 h-4 rounded bg-slate-300 dark:bg-slate-700"></div>
+                  <div className="w-12 h-2 bg-slate-300 dark:bg-slate-700 ml-3 rounded"></div>
+                </div>
+              </div>
+
+              {/* Decorative blur */}
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-500/20 blur-3xl rounded-full pointer-events-none"></div>
+            </div>
+          </div>
+          
         </div>
       </div>
-      
-      <style dangerouslySetInnerHTML={{__html:`
-        @keyframes pan-bg {
-          0% { background-position: 0px 0px; }
-          100% { background-position: -640px 640px; }
-        }
-      `}} />
     </section>
   );
 };

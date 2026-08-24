@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
 import { generateWaLink } from '../../utils/whatsapp';
 
@@ -8,6 +9,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const { isDark, toggle } = useTheme();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -33,10 +35,12 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Solusi', href: '#solusi' },
-    { name: 'Template', href: '#katalog' },
-    { name: 'Cara Kerja', href: '#cara-kerja' },
-    { name: 'FAQ', href: '#faq' },
+    { name: 'Solusi', href: '/#solusi' },
+    { name: 'Template', href: '/template' },
+    { name: 'Cara Kerja', href: '/#cara-kerja' },
+    { name: 'Harga', href: '/#harga' },
+    { name: 'Fitur', href: '/#fitur' },
+    { name: 'FAQ', href: '/#faq' },
   ];
 
   const scrolledClasses = isScrolled
@@ -54,7 +58,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
 
           {/* ── Logo ── */}
-          <a href="#" className="flex items-center gap-3 group flex-shrink-0" aria-label="Rumah Template Pendidikan">
+          <Link to="/" className="flex items-center gap-3 group flex-shrink-0" aria-label="Rumah Template Pendidikan">
             {/* Isometric stack logo */}
             <div className="relative w-10 h-10 flex items-center justify-center">
               <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full group-hover:scale-105 transition-transform duration-300 drop-shadow-sm">
@@ -71,18 +75,35 @@ const Navbar = () => {
                 Pendidikan
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* ── Desktop Nav ── */}
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => {
-              const sectionId = link.href.substring(1);
-              const isActive = activeSection === sectionId;
+              const sectionId = link.href.split('#')[1];
+              let isActive = false;
+              if (link.href.startsWith('/#')) {
+                isActive = activeSection === sectionId && location.pathname === '/';
+              } else {
+                isActive = location.pathname === link.href;
+              }
+              
+              // Helper to handle smooth scroll if on same page
+              const handleClick = (e) => {
+                if (link.href.startsWith('/#') && location.pathname === '/') {
+                  e.preventDefault();
+                  const target = document.getElementById(sectionId);
+                  if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }
+              };
               
               return (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
+                  onClick={handleClick}
                   className={`text-[15px] font-medium transition-colors duration-200 relative group py-1 ${
                     isActive 
                       ? 'text-blue-600 dark:text-blue-400' 
@@ -93,7 +114,7 @@ const Navbar = () => {
                   <span className={`absolute bottom-0 left-0 h-[2px] bg-blue-600 dark:bg-blue-400 transition-all duration-300 rounded-t-sm ${
                     isActive ? 'w-full' : 'w-0 group-hover:w-full'
                   }`} />
-                </a>
+                </Link>
               );
             })}
           </div>
@@ -172,16 +193,31 @@ const Navbar = () => {
         }`}
       >
         <div className="px-4 py-4 space-y-1">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsMenuOpen(false)}
-              className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors"
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const sectionId = link.href.substring(2);
+            
+            const handleClick = (e) => {
+              setIsMenuOpen(false);
+              if (link.href.startsWith('/#') && location.pathname === '/') {
+                e.preventDefault();
+                const target = document.getElementById(sectionId);
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' });
+                }
+              }
+            };
+
+            return (
+              <Link
+                key={link.name}
+                to={link.href}
+                onClick={handleClick}
+                className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors"
+              >
+                {link.name}
+              </Link>
+            );
+          })}
           <div className="pt-3 border-t border-slate-100 dark:border-slate-800/60 mt-2">
             <a
               href={generateWaLink()}

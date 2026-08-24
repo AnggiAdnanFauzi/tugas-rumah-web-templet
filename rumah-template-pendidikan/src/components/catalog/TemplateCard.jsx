@@ -2,18 +2,20 @@ import React from 'react';
 import Badge from '../common/Badge';
 import Button from '../common/Button';
 import { generateWaLink } from '../../utils/whatsapp';
+import { Link } from 'react-router-dom';
 
 const TemplateCard = ({ template }) => {
   const {
-    name,
+    title,
     categoryLabel,
     thumbnail,
     description,
+    features,
     demoUrl,
   } = template;
 
   const handleWaClick = () => {
-    window.open(generateWaLink(name), '_blank', 'noopener,noreferrer');
+    window.open(generateWaLink(title), '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -24,7 +26,7 @@ const TemplateCard = ({ template }) => {
         {thumbnail ? (
           <img 
             src={thumbnail} 
-            alt={`Thumbnail ${name}`} 
+            alt={`Thumbnail ${title}`} 
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
           />
         ) : (
@@ -38,27 +40,32 @@ const TemplateCard = ({ template }) => {
       </div>
 
       {/* Content */}
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-5 flex flex-col flex-grow">
         <div className="mb-3">
           <Badge>{categoryLabel || 'Kategori'}</Badge>
         </div>
-        <h3 className="text-xl font-bold text-slate-900 mb-2 leading-tight">{name}</h3>
-        <p className="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">{description}</p>
+        <h3 className="text-base font-bold text-slate-900 mb-1.5 leading-tight">{title}</h3>
+        <p className="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-2">{description}</p>
+        
+        {features && features.length > 0 && (
+          <div className="mb-6 flex-grow">
+            <div className="flex flex-wrap gap-1.5">
+              {features.slice(0, 3).map((feat, idx) => (
+                <span key={idx} className="inline-flex items-center px-2 py-1 rounded-md bg-slate-50 text-[11px] font-medium text-slate-500 border border-slate-100">
+                  {feat}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
         
         {/* Actions */}
-        <div className="flex flex-col gap-3 mt-auto pt-4 border-t border-slate-100">
-          {demoUrl && (
-            <a 
-              href={demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full"
-            >
-              <Button variant="secondary" className="w-full">
-                Lihat Live Demo
-              </Button>
-            </a>
-          )}
+        <div className="flex flex-col gap-2 mt-auto pt-4 border-t border-slate-100">
+          <Link to={`/template/${template.slug}`} className="w-full">
+            <Button variant="secondary" className="w-full">
+              Lihat Detail
+            </Button>
+          </Link>
           <Button variant="primary" className="w-full" onClick={handleWaClick}>
             Konsultasikan Template Ini
           </Button>

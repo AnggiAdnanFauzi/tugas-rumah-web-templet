@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { generateWaLink } from '../../utils/whatsapp';
 import { CheckCircle2, Smartphone, LayoutTemplate, ArrowRight, Monitor, Play } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 
 /* ─────────────────────────────────────────────
@@ -53,7 +54,7 @@ const HeroSection = () => {
   return (
     <section
       ref={revealRef}
-      className="relative min-h-[80vh] flex items-center overflow-hidden bg-white dark:bg-[#080D1C] pt-20 pb-12 lg:pb-16"
+      className="relative min-h-[55vh] flex items-center overflow-hidden bg-white dark:bg-[#080D1C] pt-20 lg:pt-24 pb-6 lg:pb-10"
     >
       {/* ── Layer 1: Ambient background ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -65,13 +66,13 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-8">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-6">
 
           {/* ── LEFT: Text Column (45%) ── */}
           <div className="w-full lg:w-[45%] text-center lg:text-left">
             {/* Badge */}
             <div
-              className={`reveal-up inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-slate-200/80 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm mb-6 transition-colors duration-300 hover:border-slate-300 dark:hover:border-slate-700`}
+              className={`reveal-up inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-slate-200/80 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm mb-4 transition-colors duration-300 hover:border-slate-300 dark:hover:border-slate-700`}
             >
               <div className="relative flex items-center justify-center w-2 h-2">
                 <span className="absolute w-full h-full rounded-full bg-blue-500 opacity-60 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]" />
@@ -84,18 +85,18 @@ const HeroSection = () => {
 
             {/* Headline */}
             <h1
-              className="reveal-up text-[2.2rem] sm:text-[2.75rem] lg:text-[3rem] font-bold text-slate-900 dark:text-slate-50 leading-[1.15] tracking-tight mb-5"
+              className="reveal-up text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-slate-50 leading-[1.15] tracking-tight mb-4"
               style={{ transitionDelay: '100ms' }}
             >
-              Bangun Presensi Digital <span className="gradient-text">Sekolah</span> Lebih Cepat.
+              Bangun Website Pendidikan yang <br className="hidden sm:block lg:hidden" /><span className="gradient-text">Profesional & Dipercaya</span>.
             </h1>
 
             {/* Description */}
             <p
-              className="reveal-up text-[15px] sm:text-base text-slate-500 dark:text-slate-400 leading-relaxed mb-8 max-w-[480px] mx-auto lg:mx-0"
+              className="reveal-up text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6 max-w-[480px] mx-auto lg:mx-0"
               style={{ transitionDelay: '200ms' }}
             >
-              Koleksi desain terkurasi untuk instansi pendidikan. Lihat live demo langsung dari browser Anda tanpa harus setup yang rumit.
+              Kami membantu sekolah, lembaga kursus, dan pusat training memiliki presensi digital yang modern, responsif, dan siap melayani pengunjung.
             </p>
 
             {/* CTA Buttons */}
@@ -103,26 +104,26 @@ const HeroSection = () => {
               className="reveal-up flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5"
               style={{ transitionDelay: '300ms' }}
             >
-              <a
-                href="#katalog"
-                className="btn-micro w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-[13px] text-white bg-slate-900 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100 shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] transition-all group"
+              <Link
+                to="/template"
+                className="btn-micro w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-[13px] text-white bg-blue-600 hover:bg-blue-500 shadow-md transition-all group"
               >
-                Eksplorasi Katalog
+                Lihat Template
                 <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
+              </Link>
               <a
                 href={generateWaLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-micro w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-[13px] text-slate-700 dark:text-slate-300 bg-white dark:bg-[#111827] hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/60 shadow-sm transition-all"
               >
-                Konsultasi Bebas
+                Konsultasi Gratis
               </a>
             </div>
 
             {/* Trust badges */}
             <div
-              className="reveal-up flex items-center justify-center lg:justify-start gap-6 mt-10"
+              className="reveal-up flex items-center justify-center lg:justify-start gap-6 mt-8"
               style={{ transitionDelay: '400ms' }}
             >
               {[
@@ -142,7 +143,7 @@ const HeroSection = () => {
             className="w-full lg:w-[55%] flex justify-center lg:justify-end relative reveal-scale"
             style={{ transitionDelay: '500ms' }}
           >
-            <div className="relative w-full max-w-[560px]">
+            <div className="relative w-full max-w-[480px]">
               
               {/* Parallax Container */}
               <div
@@ -166,18 +167,55 @@ const HeroSection = () => {
                     </div>
                   </div>
 
-                  {/* Browser Content */}
-                  <div className="p-6">
-                    {/* Abstract Hero Image Area */}
-                    <div className="h-32 rounded-xl bg-slate-100 dark:bg-slate-800/40 border border-slate-200/50 dark:border-slate-700/30 w-full mb-4 flex items-center justify-center relative overflow-hidden">
-                      <div className="absolute inset-0 opacity-20 dark:opacity-10 bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.05)_50%,transparent_75%)] bg-[length:20px_20px]" />
-                      <Play size={24} className="text-slate-300 dark:text-slate-600" />
+                  {/* Browser Content - Realistic UI Mockup */}
+                  <div className="flex h-[240px] sm:h-[280px] bg-[#F8FAFC] dark:bg-[#0F172A]">
+                    {/* Sidebar */}
+                    <div className="w-[25%] border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#151E32] p-3 flex flex-col gap-3">
+                      <div className="h-6 w-3/4 bg-slate-100 dark:bg-slate-800 rounded-md mb-2"></div>
+                      <div className="space-y-2">
+                        <div className="h-4 w-full bg-blue-50 dark:bg-blue-900/30 rounded-md"></div>
+                        <div className="h-4 w-5/6 bg-slate-50 dark:bg-slate-800/50 rounded-md"></div>
+                        <div className="h-4 w-4/6 bg-slate-50 dark:bg-slate-800/50 rounded-md"></div>
+                      </div>
                     </div>
-                    {/* Abstract Text Lines */}
-                    <div className="space-y-3">
-                      <div className="h-2.5 w-1/3 bg-slate-200 dark:bg-slate-700 rounded-full" />
-                      <div className="h-2 w-3/4 bg-slate-100 dark:bg-slate-800 rounded-full" />
-                      <div className="h-2 w-1/2 bg-slate-100 dark:bg-slate-800 rounded-full" />
+                    {/* Main Content Area */}
+                    <div className="w-[75%] p-4 flex flex-col gap-4">
+                      {/* Header */}
+                      <div className="flex justify-between items-center pb-3 border-b border-slate-200 dark:border-slate-800">
+                        <div className="h-5 w-1/3 bg-slate-200 dark:bg-slate-700 rounded-md"></div>
+                        <div className="flex gap-2">
+                          <div className="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+                        </div>
+                      </div>
+                      {/* Dashboard Cards */}
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="h-16 bg-white dark:bg-[#1E293B] rounded-lg border border-slate-100 dark:border-slate-700 p-2 flex flex-col justify-center gap-1">
+                          <div className="h-2 w-1/2 bg-slate-100 dark:bg-slate-600 rounded"></div>
+                          <div className="h-4 w-1/3 bg-blue-100 dark:bg-blue-900/50 rounded"></div>
+                        </div>
+                        <div className="h-16 bg-white dark:bg-[#1E293B] rounded-lg border border-slate-100 dark:border-slate-700 p-2 flex flex-col justify-center gap-1">
+                          <div className="h-2 w-1/2 bg-slate-100 dark:bg-slate-600 rounded"></div>
+                          <div className="h-4 w-1/3 bg-emerald-100 dark:bg-emerald-900/50 rounded"></div>
+                        </div>
+                      </div>
+                      {/* Table / List */}
+                      <div className="flex-1 bg-white dark:bg-[#1E293B] rounded-lg border border-slate-100 dark:border-slate-700 p-3">
+                        <div className="h-3 w-1/4 bg-slate-200 dark:bg-slate-600 rounded mb-3"></div>
+                        <div className="space-y-2">
+                          <div className="flex gap-2 items-center">
+                            <div className="w-4 h-4 rounded bg-slate-100 dark:bg-slate-800"></div>
+                            <div className="h-2 w-full bg-slate-50 dark:bg-slate-700/50 rounded"></div>
+                          </div>
+                          <div className="flex gap-2 items-center">
+                            <div className="w-4 h-4 rounded bg-slate-100 dark:bg-slate-800"></div>
+                            <div className="h-2 w-5/6 bg-slate-50 dark:bg-slate-700/50 rounded"></div>
+                          </div>
+                          <div className="flex gap-2 items-center">
+                            <div className="w-4 h-4 rounded bg-slate-100 dark:bg-slate-800"></div>
+                            <div className="h-2 w-4/6 bg-slate-50 dark:bg-slate-700/50 rounded"></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -2,14 +2,17 @@ import React from 'react';
 import { generateWaLink } from '../../utils/whatsapp';
 import { SITE_CONFIG } from '../../config/site';
 import { MessageCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const YEAR = new Date().getFullYear();
 
 const NAV_LINKS = [
-  { name: 'Solusi', href: '#solusi' },
-  { name: 'Template', href: '#katalog' },
-  { name: 'Cara Kerja', href: '#cara-kerja' },
-  { name: 'FAQ', href: '#faq' },
+  { name: 'Solusi', href: '/#solusi' },
+  { name: 'Template', href: '/template' },
+  { name: 'Cara Kerja', href: '/#cara-kerja' },
+  { name: 'Harga', href: '/#harga' },
+  { name: 'Fitur', href: '/#fitur' },
+  { name: 'FAQ', href: '/#faq' },
 ];
 
 const Footer = () => (
@@ -17,7 +20,7 @@ const Footer = () => (
     {/* Subtle top border */}
     <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-slate-700/60 to-transparent" />
 
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
 
         {/* Brand column */}
@@ -44,12 +47,12 @@ const Footer = () => (
           <ul className="space-y-3">
             {NAV_LINKS.map((link) => (
               <li key={link.name}>
-                <a
-                  href={link.href}
+                <Link
+                  to={link.href}
                   className="text-sm text-slate-500 hover:text-slate-200 transition-colors duration-200 hover:translate-x-0.5 inline-block"
                 >
                   {link.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -79,7 +82,7 @@ const Footer = () => (
       </div>
 
       {/* Bottom bar */}
-      <div className="mt-12 pt-6 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-3">
+      <div className="mt-8 pt-5 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-3">
         <p className="text-xs text-slate-600">
           © {YEAR} {SITE_CONFIG.brandName}. All rights reserved.
         </p>
