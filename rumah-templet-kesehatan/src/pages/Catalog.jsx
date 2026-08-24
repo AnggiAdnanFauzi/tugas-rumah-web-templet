@@ -29,7 +29,7 @@ const Catalog = () => {
         </div>
 
         {/* Control Bar */}
-        <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mb-10 flex flex-col md:flex-row gap-4 items-center justify-between sticky top-24 z-40">
+        <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mb-8 flex flex-col md:flex-row gap-4 items-center justify-between sticky top-24 z-40">
           
           {/* Category Tabs */}
           <div className="flex flex-wrap gap-2 justify-center md:justify-start w-full md:w-auto">
@@ -68,7 +68,7 @@ const Catalog = () => {
         {filteredTemplates.length > 0 ? (
           <motion.div 
             layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
           >
             <AnimatePresence>
               {filteredTemplates.map((template) => (

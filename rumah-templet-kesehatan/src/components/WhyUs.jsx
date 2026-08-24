@@ -1,63 +1,85 @@
 import React from 'react';
-import { CheckCircle2, Stethoscope, Smile, HeartPulse, Pill, Microscope, Building2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ShieldCheck, LayoutTemplate, Users } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './common/Card';
 
-const specialties = [
-  { icon: <Stethoscope size={28} />, label: "Klinik Umum", color: "text-ocean-blue bg-blue-50" },
-  { icon: <Smile size={28} />, label: "Dokter Gigi", color: "text-purple-500 bg-purple-50" },
-  { icon: <Building2 size={28} />, label: "Rumah Sakit", color: "text-electric-teal bg-teal-50" },
-  { icon: <Pill size={28} />, label: "Apotek", color: "text-orange-500 bg-orange-50" },
-  { icon: <Microscope size={28} />, label: "Lab & Estetika", color: "text-pink-500 bg-pink-50" },
-  { icon: <HeartPulse size={28} />, label: "Wellness Center", color: "text-red-500 bg-red-50" },
-];
-
-const reasons = [
-  "Spesialis eksklusif untuk industri layanan kesehatan, bukan generalis.",
-  "Desain yang membangun kepercayaan pasien sejak detik pertama.",
-  "Tidak perlu ahli teknis—kami tangani semua dari awal hingga tayang.",
-  "Struktur konten yang dioptimasi untuk meningkatkan booking online.",
-  "Update dan perbaikan cepat karena kami paham konteks medis Anda.",
+const values = [
+  {
+    icon: <ShieldCheck size={32} className="text-primary" strokeWidth={1.5} />,
+    title: "Dirancang untuk Profesional",
+    desc: "Struktur website dibuat agar layanan kesehatan terlihat kredibel, aman, dan terpercaya."
+  },
+  {
+    icon: <LayoutTemplate size={32} className="text-secondary" strokeWidth={1.5} />,
+    title: "Siap Disesuaikan",
+    desc: "Template fleksibel dan responsif untuk berbagai kebutuhan spesifik layanan kesehatan."
+  },
+  {
+    icon: <Users size={32} className="text-accent" strokeWidth={1.5} />,
+    title: "Fokus pada Pengguna",
+    desc: "Struktur informasi dan antarmuka dibuat agar pasien mudah menemukan informasi penting."
+  }
 ];
 
 const WhyUs = () => {
   return (
-    <section className="py-28 bg-white" id="mengapa-kami">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section className="py-12 md:py-14 lg:py-16 bg-background" id="mengapa-kami">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="text-center mb-8 max-w-2xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-4"
+          >
+            Mengapa Memilih Kami?
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-2xl md:text-3xl font-bold text-foreground leading-tight mb-6"
+          >
+            Fondasi Digital untuk <br className="hidden md:block" />
+            Layanan Kesehatan Anda
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-muted-foreground text-lg"
+          >
+            Kami memahami bahwa kredibilitas adalah kunci. Setiap elemen desain kami disesuaikan untuk membangun kepercayaan pasien sejak pandangan pertama.
+          </motion.p>
+        </div>
 
-          {/* Left: Text */}
-          <div>
-            <span className="inline-block bg-ocean-blue/10 text-ocean-blue text-sm font-semibold px-4 py-1.5 rounded-full mb-5">
-              Mengapa Memilih Kami?
-            </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-dark leading-tight mb-6">
-              Kami Bukan Jasa Web Biasa. <br/>
-              <span className="text-gradient">Kami Spesialis Kesehatan.</span>
-            </h2>
-            <p className="text-slate-500 text-lg mb-8 leading-relaxed">
-              Kami hanya fokus di satu industri: <strong className="text-slate-700">kesehatan</strong>. Artinya, setiap template, setiap kata, dan setiap desain yang kami buat sudah disesuaikan dengan kebutuhan, regulasi, dan bahasa yang dimengerti pasien Anda.
-            </p>
-            <ul className="space-y-3">
-              {reasons.map((reason, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <CheckCircle2 size={20} className="text-electric-teal flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-600">{reason}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Right: Specialty Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {specialties.map((sp, i) => (
-              <div key={i} className="flex flex-col items-center justify-center gap-3 p-6 rounded-2xl border border-slate-100 hover:border-slate-200 hover:shadow-lg transition-all duration-300 bg-white group cursor-default">
-                <div className={`p-3 rounded-xl ${sp.color} group-hover:scale-110 transition-transform`}>
-                  {sp.icon}
-                </div>
-                <span className="font-semibold text-slate-700 text-sm text-center">{sp.label}</span>
-              </div>
-            ))}
-          </div>
-
+        <div className="grid md:grid-cols-3 gap-5">
+          {values.map((val, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 * idx }}
+              whileHover={{ y: -4 }}
+            >
+              <Card className="h-full border-border/50 bg-white/50 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <CardHeader className="items-center text-center pb-2">
+                  <div className="w-16 h-16 rounded-2xl bg-muted flex items-center justify-center mb-4">
+                    {val.icon}
+                  </div>
+                  <CardTitle>{val.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <CardDescription className="text-base leading-relaxed">
+                    {val.desc}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

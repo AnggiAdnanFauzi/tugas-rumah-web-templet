@@ -7,11 +7,33 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Base colors (Existing)
         'ocean-blue': '#0284C7',
         'electric-teal': '#0D9488',
         'neon-cyan': '#06B6D4',
         'slate-dark': '#0F172A',
         'clean-light': '#F8FAFC',
+        
+        // Semantic colors (Phase 2 Design System)
+        primary: {
+          DEFAULT: '#0284C7', // ocean-blue
+          foreground: '#FFFFFF',
+        },
+        secondary: {
+          DEFAULT: '#0D9488', // electric-teal
+          foreground: '#FFFFFF',
+        },
+        accent: {
+          DEFAULT: '#06B6D4', // neon-cyan
+          foreground: '#FFFFFF',
+        },
+        background: '#F8FAFC', // clean-light
+        foreground: '#0F172A', // slate-dark
+        muted: {
+          DEFAULT: '#F1F5F9', // slate-100
+          foreground: '#64748B', // slate-500
+        },
+        border: '#E2E8F0', // slate-200
       },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],

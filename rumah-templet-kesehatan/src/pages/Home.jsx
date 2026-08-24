@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { SITE_CONFIG } from '../config/site';
 import Hero from '../components/Hero';
 import WhyUs from '../components/WhyUs';
-import BentoGrid from '../components/BentoGrid';
+import CategorySection from '../components/CategorySection';
 import StrongFoundation from '../components/StrongFoundation';
 import Timeline from '../components/Timeline';
 import Features from '../components/Features';
@@ -11,14 +12,18 @@ import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 
 const Home = () => {
+  useEffect(() => {
+    document.title = `Website Profesional untuk Layanan Kesehatan Modern | ${SITE_CONFIG.name}`;
+  }, []);
+
   return (
     <div className="pt-20">
       {/* 1. Hero Cinematic */}
       <Hero />
       {/* 2. Mengapa Memilih Kami - Spesialis Kesehatan */}
       <WhyUs />
-      {/* 3. Solusi Per Kategori (Bento Grid) */}
-      <BentoGrid />
+      {/* 3. Kategori Healthcare */}
+      <CategorySection />
       {/* 4. Pondasi yang Kuat - Technical Foundation */}
       <StrongFoundation />
       {/* 5. Cara Kerja - Interactive Timeline */}

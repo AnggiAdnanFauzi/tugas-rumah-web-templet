@@ -44,12 +44,12 @@ const BentoGrid = () => {
   return (
     <section className="py-24 bg-white" id="solusi">
       <div className="container mx-auto px-6 max-w-7xl">
-        <div className="text-center mb-16 animate-fade-up">
+        <div className="text-center mb-8 animate-fade-up">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-dark mb-4">Solusi Spesifik Untuk Anda</h2>
           <p className="text-slate-500 max-w-2xl mx-auto">Kami merancang struktur dan fitur web yang disesuaikan secara khusus untuk berbagai tipe fasilitas layanan kesehatan.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[200px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[200px]">
           {categories.map((cat, idx) => (
             <div 
               key={idx} 

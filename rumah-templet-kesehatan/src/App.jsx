@@ -1,8 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
+import TemplateCatalog from './pages/TemplateCatalog';
+import TemplateDetail from './pages/TemplateDetail';
+import { SITE_CONFIG } from './config/site';
 
 // Scroll to top on route change or hash change
 const ScrollToAnchor = () => {
@@ -33,20 +36,26 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/katalog" element={<Catalog />} />
+            {/* Catalog lama dari setup sebelumnya, bisa dihapus bertahap */}
+            <Route path="/katalog-lama" element={<Catalog />} /> 
+            
+            {/* Phase 1 Routing Foundation */}
+            <Route path="/template" element={<TemplateCatalog />} />
+            <Route path="/template/:slug" element={<TemplateDetail />} />
           </Routes>
         </main>
         
         {/* Footer */}
-        <footer className="bg-slate-dark text-slate-400 py-14 border-t border-white/10 mt-auto">
+        <footer className="bg-foreground text-muted-foreground py-10 md:py-12 border-t border-white/10 mt-auto">
           <div className="container mx-auto px-6 max-w-7xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               {/* Brand */}
               <div>
                 <span className="font-bold text-xl tracking-tight text-white block mb-3">
-                  Health<span className="text-ocean-blue">Template</span> Hub
+                  {SITE_CONFIG?.name?.split(' ')[0]}
+                  <span className="text-primary">{SITE_CONFIG?.name?.substring(SITE_CONFIG.name.indexOf(' '))}</span>
                 </span>
-                <p className="text-sm text-slate-400 leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   Spesialis pembuatan website untuk fasilitas layanan kesehatan Indonesia. Profesional, cepat, dan terpercaya.
                 </p>
               </div>
@@ -54,25 +63,25 @@ function App() {
               <div>
                 <h4 className="text-white font-semibold mb-4">Navigasi</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="/#mengapa-kami" className="hover:text-white transition-colors">Mengapa Kami</a></li>
-                  <li><a href="/katalog" className="hover:text-white transition-colors">Katalog Template</a></li>
-                  <li><a href="/#harga" className="hover:text-white transition-colors">Harga</a></li>
-                  <li><a href="/#fitur" className="hover:text-white transition-colors">Fitur</a></li>
-                  <li><a href="/#faq" className="hover:text-white transition-colors">FAQ</a></li>
+                  <li><Link to="/#mengapa-kami" className="hover:text-white transition-colors">Mengapa Kami</Link></li>
+                  <li><Link to="/template" className="hover:text-white transition-colors">Katalog Template</Link></li>
+                  <li><Link to="/#harga" className="hover:text-white transition-colors">Harga</Link></li>
+                  <li><Link to="/#fitur" className="hover:text-white transition-colors">Fitur</Link></li>
+                  <li><Link to="/#faq" className="hover:text-white transition-colors">FAQ</Link></li>
                 </ul>
               </div>
               {/* Contact */}
               <div>
                 <h4 className="text-white font-semibold mb-4">Kontak</h4>
                 <ul className="space-y-2 text-sm">
-                  <li className="hover:text-white transition-colors">📱 +62 812-3456-7890</li>
-                  <li className="hover:text-white transition-colors">✉️ halo@healthtemplatehub.id</li>
-                  <li className="hover:text-white transition-colors">🕐 Senin–Sabtu, 08.00–17.00 WIB</li>
+                  <li className="hover:text-white transition-colors">📱 +{SITE_CONFIG?.waNumber}</li>
+                  <li className="hover:text-white transition-colors">✉️ {SITE_CONFIG?.email}</li>
+                  <li className="hover:text-white transition-colors">🕐 {SITE_CONFIG?.operationalHours}</li>
                 </ul>
               </div>
             </div>
-            <div className="border-t border-white/10 pt-6 text-center text-xs text-slate-500">
-              &copy; {new Date().getFullYear()} HealthTemplate Hub. All rights reserved.
+            <div className="border-t border-white/10 pt-6 text-center text-xs text-muted-foreground">
+              &copy; {new Date().getFullYear()} {SITE_CONFIG?.name || 'HealthTemplate Hub'}. All rights reserved.
             </div>
           </div>
         </footer>

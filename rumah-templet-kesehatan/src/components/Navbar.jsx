@@ -3,7 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { Stethoscope, Menu, X } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { WA_LINK } from '../config/site';
+import { WA_LINK, SITE_CONFIG } from '../config/site';
+import { Button } from './common/Button';
 
 export function cn(...inputs) {
   return twMerge(clsx(inputs));
@@ -24,7 +25,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Katalog Template', path: '/katalog' },
+    { name: 'Katalog', path: '/template' },
     { name: 'Mengapa Kami', path: '/#mengapa-kami' },
     { name: 'Harga', path: '/#harga' },
     { name: 'Fitur', path: '/#fitur' },
@@ -34,42 +35,44 @@ const Navbar = () => {
   return (
     <nav className={cn(
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-      isScrolled ? 'glass-panel py-3' : 'bg-transparent py-5'
+      isScrolled ? 'glass-panel py-2' : 'bg-transparent py-3'
     )}>
       <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="bg-ocean-blue p-2 rounded-lg text-white group-hover:bg-electric-teal transition-colors">
-            <Stethoscope size={24} />
+          <div className="bg-primary p-1.5 rounded-lg text-primary-foreground group-hover:bg-secondary transition-colors">
+            <Stethoscope size={20} />
           </div>
-          <span className="font-bold text-xl tracking-tight text-slate-dark">
-            Health<span className="text-ocean-blue">Template</span> Hub
+          <span className="font-bold text-lg tracking-tight text-foreground">
+            {SITE_CONFIG.name.split(' ')[0]}
+            <span className="text-primary">{SITE_CONFIG.name.substring(SITE_CONFIG.name.indexOf(' '))}</span>
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          <div className="flex gap-6 text-sm font-medium">
+        <div className="hidden md:flex items-center gap-5">
+          <div className="flex gap-5 text-sm font-medium">
             {navLinks.map((link) => (
               <Link 
                 key={link.name} 
                 to={link.path}
                 className={cn(
-                  "hover:text-ocean-blue transition-colors",
-                  location.pathname === link.path ? "text-ocean-blue font-semibold" : "text-slate-600"
+                  "hover:text-primary transition-colors",
+                  location.pathname === link.path ? "text-primary font-semibold" : "text-muted-foreground"
                 )}
               >
                 {link.name}
               </Link>
             ))}
           </div>
-          <a 
-            href={WA_LINK('Halo, saya ingin konsultasi gratis pembuatan website kesehatan')} 
-            target="_blank" 
+          <Button 
+            href={WA_LINK('Halo, saya ingin konsultasi gratis pembuatan website kesehatan')}
+            target="_blank"
             rel="noopener noreferrer"
-            className="bg-slate-dark text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-ocean-blue transition-all hover:shadow-lg hover:shadow-ocean-blue/30"
+            variant="primary"
+            size="sm"
           >
             Konsultasi Gratis
-          </a>
+          </Button>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -88,20 +91,21 @@ const Navbar = () => {
             <Link 
               key={link.name} 
               to={link.path}
-              className="text-slate-600 font-medium hover:text-ocean-blue"
+              className="text-muted-foreground font-medium hover:text-primary"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.name}
             </Link>
           ))}
-          <a 
-            href={WA_LINK('Halo, saya ingin konsultasi gratis pembuatan website kesehatan')} 
-            target="_blank" 
+          <Button 
+            href={WA_LINK('Halo, saya ingin konsultasi gratis pembuatan website kesehatan')}
+            target="_blank"
             rel="noopener noreferrer"
-            className="bg-ocean-blue text-white text-center py-3 rounded-xl font-semibold mt-2"
+            className="w-full mt-2"
+            size="sm"
           >
             Konsultasi Gratis
-          </a>
+          </Button>
         </div>
       )}
     </nav>

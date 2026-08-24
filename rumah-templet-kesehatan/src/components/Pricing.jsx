@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { CheckCircle2, MessageCircle, Star } from 'lucide-react';
 import { WA_LINK } from '../config/site';
+import { Button } from './common/Button';
+import { Card, CardContent } from './common/Card';
+import { cn } from '../utils/cn';
 
 const plans = [
   {
@@ -17,11 +21,6 @@ const plans = [
       "Basic SEO (Title, Meta, Alt)",
       "Free Revisi 2x",
       "Selesai dalam 3 hari kerja",
-    ],
-    notIncluded: [
-      "Sistem Booking Online",
-      "Halaman Blog/Artikel",
-      "Multi-bahasa",
     ],
     cta: "Pesan Sekarang",
     highlight: false,
@@ -43,9 +42,6 @@ const plans = [
       "Free Revisi 3x",
       "Selesai dalam 5–7 hari kerja",
     ],
-    notIncluded: [
-      "Sistem Login/Pasien Portal",
-    ],
     cta: "Pesan Sekarang",
     highlight: true,
   },
@@ -66,91 +62,122 @@ const plans = [
       "SLA & Dedicated Support",
       "Training Tim Internal",
     ],
-    notIncluded: [],
     cta: "Konsultasi Dulu",
     highlight: false,
   },
 ];
 
 const Pricing = () => {
-  const [billing] = useState('once');
-
   return (
-    <section className="py-28 bg-white" id="harga">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <span className="inline-block bg-ocean-blue/10 text-ocean-blue text-sm font-semibold px-4 py-1.5 rounded-full mb-5">
+    <section className="py-12 md:py-14 lg:py-16 bg-background" id="harga">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="text-center mb-8 max-w-3xl mx-auto">
+          <motion.span 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-5"
+          >
             Harga Transparan
-          </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-dark leading-tight mb-5">
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-2xl md:text-3xl font-bold text-foreground leading-tight mb-4"
+          >
             Investasi yang <span className="text-gradient">Sepadan dengan Hasilnya</span>
-          </h2>
-          <p className="text-slate-500 text-lg leading-relaxed">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto leading-relaxed"
+          >
             Pilih paket yang sesuai dengan skala dan kebutuhan fasilitas kesehatan Anda. Tidak ada biaya tersembunyi.
-          </p>
+          </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 lg:gap-6 items-stretch">
           {plans.map((plan, i) => (
-            <div
+            <motion.div
               key={i}
-              className={`relative rounded-3xl p-8 flex flex-col border transition-all duration-300 ${
-                plan.highlight
-                  ? 'bg-slate-dark text-white border-transparent shadow-2xl shadow-ocean-blue/20 scale-105'
-                  : 'bg-white border-slate-200 hover:border-ocean-blue/50 hover:shadow-xl'
-              }`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 * i }}
+              className="relative flex"
             >
-              {plan.badge && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-ocean-blue text-white text-xs font-bold px-5 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg">
-                    <Star size={12} fill="white" /> {plan.badge}
-                  </span>
-                </div>
-              )}
-
-              <div className="mb-6">
-                <h3 className={`font-bold text-lg mb-1 ${plan.highlight ? 'text-neon-cyan' : 'text-ocean-blue'}`}>
-                  {plan.name}
-                </h3>
-                <div className={`text-4xl font-extrabold mb-3 ${plan.highlight ? 'text-white' : 'text-slate-dark'}`}>
-                  {plan.price}
-                </div>
-                <p className={`text-sm leading-relaxed ${plan.highlight ? 'text-slate-400' : 'text-slate-500'}`}>
-                  {plan.desc}
-                </p>
-              </div>
-
-              <div className={`border-t mb-6 ${plan.highlight ? 'border-white/10' : 'border-slate-100'}`}></div>
-
-              <ul className="space-y-3 flex-grow">
-                {plan.features.map((f, fi) => (
-                  <li key={fi} className="flex items-start gap-2.5">
-                    <CheckCircle2 size={17} className={`flex-shrink-0 mt-0.5 ${plan.highlight ? 'text-electric-teal' : 'text-electric-teal'}`} />
-                    <span className={`text-sm ${plan.highlight ? 'text-slate-300' : 'text-slate-600'}`}>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href={WA_LINK(`Halo, saya tertarik dengan paket ${plan.name} untuk website kesehatan`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`mt-8 w-full py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all ${
+              <Card
+                className={cn(
+                  "w-full flex flex-col transition-all duration-300 relative overflow-visible",
                   plan.highlight
-                    ? 'bg-ocean-blue text-white hover:bg-ocean-blue/90 shadow-lg shadow-ocean-blue/30'
-                    : 'bg-slate-dark text-white hover:bg-ocean-blue'
-                }`}
+                    ? "bg-foreground text-background border-transparent shadow-xl md:-translate-y-2"
+                    : "bg-white border-border hover:border-primary/50 hover:shadow-lg hover:-translate-y-1"
+                )}
               >
-                <MessageCircle size={16} />
-                {plan.cta}
-              </a>
-            </div>
+                {plan.badge && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="bg-primary text-primary-foreground text-xs font-bold px-5 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg">
+                      <Star size={12} fill="currentColor" /> {plan.badge}
+                    </span>
+                  </div>
+                )}
+
+                <CardContent className="p-4 md:p-5 flex flex-col flex-grow">
+                  <div className="mb-5">
+                    <h3 className={cn("font-bold text-xl md:text-2xl mb-2", plan.highlight ? "text-accent" : "text-primary")}>
+                      {plan.name}
+                    </h3>
+                    <div className={cn("text-3xl md:text-4xl font-bold mb-3", plan.highlight ? "text-background" : "text-foreground")}>
+                      {plan.price}
+                    </div>
+                    <p className={cn("text-sm md:text-base leading-relaxed", plan.highlight ? "text-muted" : "text-muted-foreground")}>
+                      {plan.desc}
+                    </p>
+                  </div>
+
+                  <div className={cn("border-t mb-4", plan.highlight ? "border-white/10" : "border-border")}></div>
+
+                  <ul className="space-y-3 flex-grow">
+                    {plan.features.map((f, fi) => (
+                      <li key={fi} className="flex items-start gap-2.5">
+                        <CheckCircle2 size={20} className={cn("flex-shrink-0 mt-0.5", plan.highlight ? "text-secondary" : "text-secondary")} />
+                        <span className={cn("text-sm md:text-base", plan.highlight ? "text-slate-300" : "text-slate-600")}>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Button
+                    href={WA_LINK(`Halo, saya tertarik dengan paket ${plan.name} untuk website kesehatan`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant={plan.highlight ? "primary" : "outline"}
+                    className={cn(
+                      "w-full mt-5",
+                      plan.highlight && "shadow-md shadow-primary/30"
+                    )}
+                  >
+                    <MessageCircle size={18} />
+                    {plan.cta}
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
 
-        <p className="text-center text-slate-400 text-sm mt-10">
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="text-center text-muted-foreground text-sm mt-10"
+        >
           * Harga belum termasuk domain & hosting. Estimasi biaya tambahan: Rp 150.000–300.000/tahun. Konsultasikan kebutuhan spesifik Anda bersama tim kami.
-        </p>
+        </motion.p>
       </div>
     </section>
   );

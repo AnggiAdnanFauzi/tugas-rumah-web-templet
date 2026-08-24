@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { cn } from '../utils/cn';
 
 const faqs = [
   {
@@ -25,28 +26,61 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="py-24 bg-white" id="faq">
-      <div className="container mx-auto px-6 max-w-3xl">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-dark mb-4">Pertanyaan Umum</h2>
-          <p className="text-slate-500">Hal-hal yang sering ditanyakan sebelum memulai.</p>
+    <section className="py-12 md:py-14 lg:py-16 bg-white" id="faq">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+        <div className="text-center mb-8">
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl md:text-3xl font-bold text-foreground mb-3"
+          >
+            Pertanyaan Umum
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-muted-foreground text-sm md:text-base"
+          >
+            Hal-hal yang sering ditanyakan sebelum memulai.
+          </motion.p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqs.map((faq, idx) => (
-            <div 
-              key={idx} 
-              className={`border rounded-2xl overflow-hidden transition-colors duration-300 ${openIndex === idx ? 'border-ocean-blue bg-blue-50/30' : 'border-slate-200 bg-white hover:border-slate-300'}`}
+            <motion.div 
+              key={idx}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 * idx }}
+              className={cn(
+                "border rounded-2xl overflow-hidden transition-colors duration-300",
+                openIndex === idx 
+                  ? "border-primary bg-primary/5" 
+                  : "border-border bg-white hover:border-primary/50"
+              )}
             >
               <button 
-                className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none"
+                className="w-full text-left px-5 py-4 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-2xl"
                 onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
+                aria-expanded={openIndex === idx}
               >
-                <span className="font-semibold text-slate-800 pr-8">{faq.q}</span>
+                <span className={cn(
+                  "font-semibold pr-8 transition-colors duration-300",
+                  openIndex === idx ? "text-primary" : "text-foreground"
+                )}>
+                  {faq.q}
+                </span>
                 <motion.div 
                   animate={{ rotate: openIndex === idx ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
-                  className={`flex-shrink-0 ${openIndex === idx ? 'text-ocean-blue' : 'text-slate-400'}`}
+                  className={cn(
+                    "flex-shrink-0 transition-colors duration-300",
+                    openIndex === idx ? "text-primary" : "text-muted-foreground"
+                  )}
                 >
                   <ChevronDown size={20} />
                 </motion.div>
@@ -60,13 +94,13 @@ const FAQ = () => {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                   >
-                    <div className="px-6 pb-5 text-slate-600 leading-relaxed">
+                    <div className="px-5 pb-4 text-muted-foreground text-sm md:text-base leading-relaxed">
                       {faq.a}
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

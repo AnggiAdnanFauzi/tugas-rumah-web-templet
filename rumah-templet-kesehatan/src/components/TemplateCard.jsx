@@ -42,7 +42,7 @@ const TemplateCard = ({ template }) => {
       </div>
 
       {/* Details */}
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-4 md:p-5 flex flex-col flex-grow">
         <h3 className="font-bold text-xl text-slate-800 mb-3">{template.namaTemplate}</h3>
         
         <div className="flex flex-wrap gap-2 mb-6">
