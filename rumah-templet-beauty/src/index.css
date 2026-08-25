@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  /* Beauty Semantic Colors */
+  --color-beauty-primary: #C9828E; /* Dusty Rose */
+  --color-beauty-primary-hover: #b8707c;
+  
+  --color-beauty-secondary: #E8C4C9; /* Soft Rose */
+  --color-beauty-secondary-hover: #d6b2b7;
+  
+  --color-beauty-accent: #D8B98A; /* Warm Champagne */
+  
+  --color-beauty-background: #FBF8F5; /* Warm Cream */
+  --color-beauty-surface: #FFFFFF;
+  --color-beauty-surface-hover: #fcfbfa;
+
+  --color-beauty-foreground: #29252A; /* Deep Charcoal */
+  --color-beauty-muted: #8E8A90; /* Warm Gray */
+  --color-beauty-border: #EAE5E1; /* Soft Border */
+
+  /* Shadows for depth without being overwhelming */
+  --shadow-beauty-sm: 0 2px 8px -2px rgba(41, 37, 42, 0.05);
+  --shadow-beauty-md: 0 4px 16px -4px rgba(41, 37, 42, 0.08);
+  --shadow-beauty-lg: 0 12px 32px -8px rgba(41, 37, 42, 0.12);
+}
+
+@layer base {
+  :root {
+    --background: var(--color-beauty-background);
+    --foreground: var(--color-beauty-foreground);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply antialiased;
+  }
+}
+
+@layer utilities {
+  .beauty-container {
+    @apply w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
