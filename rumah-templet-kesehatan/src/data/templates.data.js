@@ -349,4 +349,3 @@ export const templatesData = [
     status: "active",
   }
 ];
-];
