@@ -4,7 +4,7 @@ import { useAppContext } from '../../contexts/AppContext';
 
 const TemplateCard = ({ template }) => {
   const { lang } = useAppContext();
-  const { slug, title, categoryLabel, description, description_en, thumbnail, status } = template;
+  const { slug, title, categoryLabel, description, description_en, thumbnail, demoUrl, status } = template;
   const isComingSoon = status === 'coming-soon';
 
   return (
@@ -12,7 +12,18 @@ const TemplateCard = ({ template }) => {
       
       {/* Image Container */}
       <div className="relative h-64 overflow-hidden bg-surface-container border-b border-outline-variant/20">
-        {thumbnail ? (
+        {demoUrl && !isComingSoon ? (
+          <div className="w-full h-full bg-surface-container pointer-events-none relative overflow-hidden transition-transform duration-700 group-hover:scale-105">
+            <iframe 
+              src={demoUrl} 
+              title={`Live Preview of ${title}`} 
+              className="w-[400%] h-[400%] border-none absolute top-0 left-0 origin-top-left scale-[0.25] pointer-events-none"
+              loading="lazy"
+              scrolling="no"
+              tabIndex="-1"
+            />
+          </div>
+        ) : thumbnail ? (
           <img 
             src={thumbnail} 
             alt={`Thumbnail untuk ${title}`} 
