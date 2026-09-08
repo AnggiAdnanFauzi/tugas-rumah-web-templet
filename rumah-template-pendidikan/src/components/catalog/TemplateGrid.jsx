@@ -126,7 +126,18 @@ const TemplateGrid = ({ templates, selectedCategory }) => {
         <div key={template.id || index} className="reveal-scale group flex flex-col bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300" style={{ transitionDelay: `${index * 80}ms` }}>
           {/* Card Image Area */}
           <div className="relative aspect-[16/10] bg-slate-100 dark:bg-slate-800/50 overflow-hidden border-b border-slate-100 dark:border-slate-800">
-            {template.thumbnail ? (
+            {template.demoUrl ? (
+              <div className="absolute top-0 left-0 w-[400%] h-[400%] origin-top-left scale-[0.25] pointer-events-none transition-transform duration-500 group-hover:scale-[0.26]">
+                <iframe 
+                  src={template.demoUrl} 
+                  className="w-full h-full border-0 bg-white" 
+                  title={`Demo ${template.title}`} 
+                  loading="lazy"
+                  scrolling="no"
+                  tabIndex={-1}
+                />
+              </div>
+            ) : template.thumbnail ? (
               <img src={template.thumbnail} alt={template.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 gap-3">
