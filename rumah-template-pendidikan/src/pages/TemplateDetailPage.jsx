@@ -86,7 +86,18 @@ const TemplateDetailPage = () => {
           {/* LEFT COLUMN: PREVIEW AREA */}
           <div className="lg:col-span-7 reveal-up" style={{ transitionDelay: '100ms' }}>
             <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 shadow-sm relative aspect-[4/3] sm:aspect-[16/10] flex items-center justify-center">
-              {template.thumbnail ? (
+              {template.demoUrl ? (
+                <div className="absolute top-0 left-0 w-[400%] h-[400%] origin-top-left scale-[0.25] pointer-events-none">
+                  <iframe 
+                    src={template.demoUrl} 
+                    className="w-full h-full border-0 bg-white" 
+                    title={`Demo ${template.title}`} 
+                    loading="lazy"
+                    scrolling="no"
+                    tabIndex={-1}
+                  />
+                </div>
+              ) : template.thumbnail ? (
                 <img 
                   src={template.thumbnail} 
                   alt={`Preview ${template.title}`} 
