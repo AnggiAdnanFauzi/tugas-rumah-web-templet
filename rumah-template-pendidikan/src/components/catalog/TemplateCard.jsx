@@ -23,7 +23,18 @@ const TemplateCard = ({ template }) => {
       {/* Thumbnail */}
       <div className="aspect-[4/3] w-full bg-slate-50 overflow-hidden relative border-b border-slate-100">
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        {thumbnail ? (
+        {demoUrl ? (
+          <div className="absolute top-0 left-0 w-[400%] h-[400%] origin-top-left scale-[0.25] pointer-events-none transition-transform duration-700 group-hover:scale-[0.26]">
+            <iframe 
+              src={demoUrl} 
+              className="w-full h-full border-0 bg-white" 
+              title={`Demo ${title}`} 
+              loading="lazy"
+              scrolling="no"
+              tabIndex={-1}
+            />
+          </div>
+        ) : thumbnail ? (
           <img 
             src={thumbnail} 
             alt={`Thumbnail ${title}`} 
