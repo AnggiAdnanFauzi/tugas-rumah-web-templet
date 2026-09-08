@@ -1,41 +1,113 @@
 @import "tailwindcss";
 
 @theme {
-  /* Base colors */
-  --color-ocean-blue: #0284C7;
-  --color-electric-teal: #0D9488;
-  --color-neon-cyan: #06B6D4;
-  --color-slate-dark: #0F172A;
-  --color-clean-light: #F8FAFC;
+  /* ========================================
+     Clinical Clarity — Material Design 3 Tokens
+     ======================================== */
 
-  /* Semantic colors */
-  --color-primary: var(--color-ocean-blue);
-  --color-primary-foreground: #FFFFFF;
-  --color-secondary: var(--color-electric-teal);
-  --color-secondary-foreground: #FFFFFF;
-  --color-accent: var(--color-neon-cyan);
-  --color-accent-foreground: #FFFFFF;
-  --color-background: var(--color-clean-light);
-  --color-foreground: var(--color-slate-dark);
+  /* Primary */
+  --color-primary: #0058be;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #2170e4;
+  --color-on-primary-container: #fefcff;
+  --color-inverse-primary: #adc6ff;
+  --color-primary-fixed: #d8e2ff;
+  --color-primary-fixed-dim: #adc6ff;
+  --color-on-primary-fixed: #001a42;
+  --color-on-primary-fixed-variant: #004395;
+
+  /* Secondary */
+  --color-secondary: #006c49;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #6cf8bb;
+  --color-on-secondary-container: #00714d;
+  --color-secondary-fixed: #6ffbbe;
+  --color-secondary-fixed-dim: #4edea3;
+  --color-on-secondary-fixed: #002113;
+  --color-on-secondary-fixed-variant: #005236;
+
+  /* Tertiary */
+  --color-tertiary: #825100;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #a36700;
+  --color-on-tertiary-container: #fffbff;
+  --color-tertiary-fixed: #ffddb8;
+  --color-tertiary-fixed-dim: #ffb95f;
+  --color-on-tertiary-fixed: #2a1700;
+  --color-on-tertiary-fixed-variant: #653e00;
+
+  /* Error */
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  /* Surface & Background */
+  --color-surface: #faf8ff;
+  --color-surface-dim: #d2d9f4;
+  --color-surface-bright: #faf8ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f3ff;
+  --color-surface-container: #eaedff;
+  --color-surface-container-high: #e2e7ff;
+  --color-surface-container-highest: #dae2fd;
+  --color-on-surface: #131b2e;
+  --color-on-surface-variant: #424754;
+  --color-inverse-surface: #283044;
+  --color-inverse-on-surface: #eef0ff;
+  --color-surface-tint: #005ac2;
+  --color-surface-variant: #dae2fd;
+
+  /* Outline */
+  --color-outline: #727785;
+  --color-outline-variant: #c2c6d6;
+
+  /* Legacy aliases (for backward compat in pages/catalog) */
+  --color-background: #faf8ff;
+  --color-foreground: #131b2e;
   --color-muted: #F1F5F9;
-  --color-muted-foreground: #64748B;
-  --color-border: #E2E8F0;
+  --color-muted-foreground: #424754;
+  --color-border: #c2c6d6;
 
+  /* Typography */
   --font-sans: "Plus Jakarta Sans", "Inter", sans-serif;
 
+  /* Animations */
   --animate-fade-up: fadeUp 0.6s ease-out forwards;
-  --animate-blob: blob 7s infinite;
 
   @keyframes fadeUp {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
   }
-  @keyframes blob {
-    0% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(30px, -50px) scale(1.1); }
-    66% { transform: translate(-20px, 20px) scale(0.9); }
-    100% { transform: translate(0px, 0px) scale(1); }
-  }
+}
+
+.dark {
+  /* Surface & Background */
+  --color-surface: #111418;
+  --color-surface-dim: #1a1f26;
+  --color-surface-bright: #1c2128;
+  --color-surface-container-lowest: #0d0f12;
+  --color-surface-container-low: #15191e;
+  --color-surface-container: #1b2027;
+  --color-surface-container-high: #222831;
+  --color-surface-container-highest: #2b323c;
+  --color-on-surface: #e2e4e9;
+  --color-on-surface-variant: #9ca3af;
+  --color-inverse-surface: #e2e4e9;
+  --color-inverse-on-surface: #111418;
+  --color-surface-tint: #4d8df5;
+  --color-surface-variant: #28303d;
+
+  /* Outline */
+  --color-outline: #6b7280;
+  --color-outline-variant: #4b5563;
+
+  /* Legacy aliases */
+  --color-background: #0d0f12;
+  --color-foreground: #e2e4e9;
+  --color-muted: #1b2027;
+  --color-muted-foreground: #9ca3af;
+  --color-border: #4b5563;
 }
 
 @layer base {
@@ -44,33 +116,148 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-clean-light text-slate-dark antialiased overflow-x-hidden;
+    background-color: var(--color-surface-container-lowest);
+    color: var(--color-on-surface);
     font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 }
 
 @layer utilities {
+  /* Glassmorphism */
   .glass-panel {
-    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
   }
+  .dark .glass-panel {
+    background: rgba(40, 48, 68, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
   .dark-glass-panel {
-    @apply bg-slate-dark/50 backdrop-blur-xl border border-white/10;
+    background: rgba(40, 48, 68, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
+
+  /* Text Gradient */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-ocean-blue via-electric-teal to-neon-cyan;
+    background: linear-gradient(135deg, #0058be, #006c49);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
-  .mesh-bg {
-    background-color: var(--color-slate-dark);
-    background-image: 
-      radial-gradient(at 0% 0%, hsla(199,89%,39%,0.4) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, hsla(174,83%,31%,0.4) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, hsla(189,94%,43%,0.4) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, hsla(222,47%,11%,0.4) 0px, transparent 50%);
+
+  /* Mesh Gradient Background (Dark Showcase) */
+  .mesh-gradient-bg {
+    background-color: #283044;
+    background-image:
+      radial-gradient(at 0% 0%, hsla(212, 100%, 37%, 0.3) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(158, 100%, 21%, 0.3) 0px, transparent 50%);
+  }
+
+  /* Rounded-eight (8px corporate style) */
+  .rounded-eight {
+    border-radius: 8px;
+  }
+
+  /* Scroll Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Status Pulse */
+  .status-pulse {
+    position: relative;
+  }
+  .status-pulse::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    border: 2px solid #006c49;
+    animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  }
+
+  /* Animation delays */
+  .animation-delay-1000 {
+    animation-delay: 1s;
   }
   .animation-delay-2000 {
     animation-delay: 2s;
   }
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
 }
+
+/* Background Abstract Shapes */
+.bg-shape-1 {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 88, 190, 0.05) 0%, rgba(250, 248, 255, 0) 70%);
+  top: -100px;
+  right: -200px;
+  border-radius: 50%;
+  z-index: -1;
+  animation: float 20s infinite ease-in-out;
+}
+
+.bg-shape-2 {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(108, 248, 187, 0.05) 0%, rgba(250, 248, 255, 0) 70%);
+  bottom: -200px;
+  left: -300px;
+  border-radius: 50%;
+  z-index: -1;
+  animation: float 25s infinite ease-in-out reverse;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -50px) rotate(5deg); }
+  66% { transform: translate(-20px, 20px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* 3D Medical Assets Floating Animation */
+@keyframes bounce-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+}
+.medical-asset-1 { animation: bounce-float 6s infinite ease-in-out; }
+.medical-asset-2 { animation: bounce-float 7s infinite ease-in-out 1s; }
+.medical-asset-3 { animation: bounce-float 8s infinite ease-in-out 2s; }
+
+/* Pulse Ring */
+@keyframes pulse-ring {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Material Symbols sizing helper */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+

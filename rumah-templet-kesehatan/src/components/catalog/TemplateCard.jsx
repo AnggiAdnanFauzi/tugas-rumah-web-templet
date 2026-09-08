@@ -1,86 +1,64 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Check, ArrowRight } from 'lucide-react';
-import { Card, CardContent } from '../common/Card';
-import { Badge } from '../common/Badge';
-import { Button } from '../common/Button';
+import { useAppContext } from '../../contexts/AppContext';
 
 const TemplateCard = ({ template }) => {
-  const { slug, title, categoryLabel, description, thumbnail, features, status } = template;
-
+  const { lang } = useAppContext();
+  const { slug, title, categoryLabel, description, description_en, thumbnail, status } = template;
   const isComingSoon = status === 'coming-soon';
 
   return (
-    <Card className="flex flex-col h-full overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-primary/30 group">
-      {/* Thumbnail Container */}
-      <div className="relative aspect-[4/3] bg-muted overflow-hidden">
+    <article className="glass-panel rounded-xl overflow-hidden group hover:scale-[1.02] hover:shadow-xl transition-all duration-300 flex flex-col bg-surface border border-outline-variant/30 h-full">
+      
+      {/* Image Container */}
+      <div className="relative h-64 overflow-hidden bg-surface-container border-b border-outline-variant/20">
         {thumbnail ? (
           <img 
             src={thumbnail} 
             alt={`Thumbnail untuk ${title}`} 
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+          <div className="w-full h-full flex items-center justify-center text-on-surface-variant font-medium text-sm">
             No Image
           </div>
         )}
         
-        {isComingSoon && (
-          <div className="absolute top-4 right-4">
-            <Badge variant="secondary" className="shadow-lg backdrop-blur-md bg-secondary/90 text-secondary-foreground border-none">
+        <div className="absolute top-4 left-4">
+          {isComingSoon ? (
+            <span className="px-3 py-1 bg-surface/80 text-on-surface-variant rounded-full text-[9px] md:text-[10px] font-bold tracking-wider flex items-center gap-1 backdrop-blur-md shadow-sm border border-outline-variant/50 uppercase">
               Coming Soon
-            </Badge>
-          </div>
-        )}
+            </span>
+          ) : (
+            <span className="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[9px] md:text-[10px] font-bold tracking-wider flex items-center gap-1 backdrop-blur-md shadow-sm border border-white/20 uppercase">
+              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-secondary animate-pulse"></span> Active
+            </span>
+          )}
+        </div>
       </div>
 
-      {/* Content Container */}
-      <CardContent className="p-5 flex flex-col flex-grow">
-        <div className="mb-4">
-          <span className="text-xs font-bold text-primary uppercase tracking-wider mb-2 block">
-            {categoryLabel}
-          </span>
-          <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-            {title}
-          </h3>
-          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
-            {description}
-          </p>
-        </div>
-
-        {/* Features List */}
-        {features && features.length > 0 && (
-          <ul className="mb-6 space-y-2 mt-auto">
-            {features.slice(0, 3).map((feature, idx) => (
-              <li key={idx} className="flex items-start gap-2 text-xs text-muted-foreground">
-                <Check size={14} className="text-secondary flex-shrink-0 mt-0.5" />
-                <span className="line-clamp-1">{feature}</span>
-              </li>
-            ))}
-            {features.length > 3 && (
-              <li className="text-xs text-muted-foreground italic ml-6">
-                + {features.length - 3} fitur lainnya
-              </li>
-            )}
-          </ul>
-        )}
-
-        {/* CTA */}
-        <div className="mt-auto pt-4 border-t border-border">
-          <Button 
+      {/* Content */}
+      <div className="p-5 flex flex-col flex-grow">
+        <h3 className="text-lg md:text-xl font-bold text-on-surface mb-2 leading-tight">{title}</h3>
+        <p className="text-sm md:text-xs text-on-surface-variant mb-5 flex-grow leading-relaxed">
+          {lang === 'en' ? description_en : description}
+        </p>
+        
+        {/* Footer Actions */}
+        <div className="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/20">
+          <span className="text-[10px] md:text-[11px] font-bold text-primary uppercase tracking-widest">{categoryLabel}</span>
+          <Link 
             to={`/template/${slug}`} 
-            variant={isComingSoon ? "outline" : "primary"}
-            className="w-full group/btn flex items-center justify-center gap-2"
+            className={`text-xs md:text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all ${
+              isComingSoon ? 'text-outline pointer-events-none' : 'text-primary hover:text-primary-fixed-dim'
+            }`}
           >
-            Lihat Detail
-            <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-          </Button>
+            {lang === 'en' ? 'View Details' : 'Lihat Detail'} <span className="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+          </Link>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </article>
   );
 };
 

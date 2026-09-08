@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { SearchX, RefreshCw } from 'lucide-react';
 import TemplateCard from './TemplateCard';
-import { Button } from '../common/Button';
+import { Button } from '../ui/button';
 
 const TemplateGrid = ({ templates, onReset }) => {
   if (!templates || templates.length === 0) {
@@ -15,7 +15,7 @@ const TemplateGrid = ({ templates, onReset }) => {
         <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mb-6 border border-border shadow-sm">
           <SearchX size={36} className="text-muted-foreground" />
         </div>
-        <h3 className="text-2xl font-bold text-foreground mb-3">Tidak Ada Template</h3>
+        <h3 className="text-xl font-bold text-foreground mb-3">Tidak Ada Template</h3>
         <p className="text-muted-foreground max-w-md mx-auto mb-8 leading-relaxed">
           Pencarian atau filter Anda tidak membuahkan hasil. Silakan periksa kembali kata kunci yang Anda masukkan atau hapus filter untuk melihat semua koleksi kami.
         </p>
@@ -49,3 +49,4 @@ const TemplateGrid = ({ templates, onReset }) => {
 };
 
 export default TemplateGrid;
+

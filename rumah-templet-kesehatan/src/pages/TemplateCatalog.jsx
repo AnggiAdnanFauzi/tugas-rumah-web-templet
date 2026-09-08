@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { LayoutGrid, Search, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search } from 'lucide-react';
 import { templateCategories } from '../data/categories.data';
 import { templatesData } from '../data/templates.data';
 import { SITE_CONFIG } from '../config/site';
-import TemplateGrid from '../components/catalog/TemplateGrid';
-import { cn } from '../utils/cn';
+import TemplateCard from '../components/catalog/TemplateCard';
+import { useAppContext } from '../contexts/AppContext';
 
 const TemplateCatalog = () => {
+  const { t } = useAppContext();
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get('category');
   
@@ -44,12 +45,6 @@ const TemplateCatalog = () => {
     }
   };
 
-  const handleReset = () => {
-    setActiveCategory('all');
-    setSearchQuery('');
-    setSearchParams({});
-  };
-
   const filteredTemplates = useMemo(() => {
     return templatesData.filter(t => {
       // 1. Category Match
@@ -68,101 +63,89 @@ const TemplateCatalog = () => {
   }, [activeCategory, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-background pt-24 pb-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <div className="relative pt-32 pb-24 min-h-screen overflow-x-hidden antialiased bg-surface text-on-surface">
+      {/* Ambient Background Elements */}
+      <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-primary/20 rounded-full blur-[80px] -z-10 pointer-events-none opacity-40"></div>
+      <div className="absolute top-[40%] right-[-20%] w-[60vw] h-[60vw] bg-secondary/20 rounded-full blur-[80px] -z-10 pointer-events-none opacity-40"></div>
+      
+      <div className="px-6 md:px-12 lg:px-16 max-w-7xl mx-auto relative z-10">
         
-        {/* Page Header */}
-        <div className="text-center mb-12 max-w-3xl mx-auto">
-          <motion.span 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-5"
-          >
-            TEMPLATE WEBSITE
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl md:text-4xl font-bold tracking-tight text-foreground leading-tight mb-5"
-          >
-            Temukan Desain untuk <span className="text-gradient">Fasilitas Kesehatan Anda</span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-muted-foreground text-lg leading-relaxed"
-          >
-            Pilih dari berbagai kategori template yang dirancang khusus untuk klinik, dokter, dental, dan layanan wellness modern.
-          </motion.p>
-        </div>
+        {/* Catalog Header */}
+        <header className="text-center max-w-3xl mx-auto mb-16">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-on-surface mb-4">{t('catalog.title')}</h1>
+          <p className="text-lg md:text-xl text-on-surface-variant">{t('catalog.desc')}</p>
+        </header>
 
-        {/* Search & Filter Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mb-12 flex flex-col md:flex-row items-center justify-between gap-5"
-        >
-          {/* Search Input */}
-          <div className="relative w-full md:w-96 flex-shrink-0">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <Search size={18} className="text-muted-foreground" />
-            </div>
-            <input
-              type="text"
-              placeholder="Cari nama, fitur, deskripsi..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              aria-label="Cari template"
-              className="w-full bg-white border border-border text-foreground rounded-full py-3 pl-11 pr-12 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute inset-y-0 right-0 pr-4 flex items-center text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Hapus pencarian"
-              >
-                <X size={18} />
-              </button>
-            )}
-          </div>
-
-          {/* Category Navigation */}
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-3 w-full">
+        {/* Filter & Search Section */}
+        <section className="mb-12 flex flex-col md:flex-row justify-between items-center gap-6 glass-panel border border-outline-variant/30 rounded-2xl p-4 shadow-sm">
+          
+          {/* Category Tabs */}
+          <div className="flex overflow-x-auto w-full md:w-auto space-x-2 pb-2 md:pb-0" style={{ scrollbarWidth: 'none' }}>
             <button
               onClick={() => handleCategoryChange('all')}
-              className={cn(
-                "px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 flex items-center gap-2",
+              className={`whitespace-nowrap px-6 py-2 rounded-full text-sm font-semibold transition-colors ${
                 activeCategory === 'all' 
-                  ? "bg-primary text-primary-foreground shadow-md shadow-primary/30" 
-                  : "bg-white text-muted-foreground border border-border hover:border-primary hover:text-primary"
-              )}
+                  ? 'bg-primary text-on-primary' 
+                  : 'bg-transparent border border-outline-variant text-on-surface-variant hover:bg-surface-container-high'
+              }`}
             >
-              <LayoutGrid size={16} />
-              Semua
+              {t('top_templates.all_categories')}
             </button>
-            
-            {templateCategories.map(cat => (
+            {templateCategories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => handleCategoryChange(cat.id)}
-                className={cn(
-                  "px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300",
+                className={`whitespace-nowrap px-6 py-2 rounded-full text-sm font-semibold transition-colors ${
                   activeCategory === cat.id 
-                    ? "bg-primary text-primary-foreground shadow-md shadow-primary/30" 
-                    : "bg-white text-muted-foreground border border-border hover:border-primary hover:text-primary"
-                )}
+                    ? 'bg-primary text-on-primary' 
+                    : 'bg-transparent border border-outline-variant text-on-surface-variant hover:bg-surface-container-high'
+                }`}
               >
                 {cat.label}
               </button>
             ))}
           </div>
-        </motion.div>
 
-        {/* Template Grid */}
-        <TemplateGrid templates={filteredTemplates} onReset={handleReset} />
+          {/* Search Bar */}
+          <div className="relative w-full md:w-80">
+            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+            <input
+              type="text"
+              placeholder={t('catalog.search')}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 rounded-full border border-outline-variant bg-surface/50 focus:border-primary focus:ring-1 focus:ring-primary text-sm text-on-surface outline-none transition-all placeholder:text-outline-variant"
+            />
+          </div>
+        </section>
+
+        {/* Grid Templates */}
+        {filteredTemplates.length > 0 ? (
+          <motion.div 
+            layout
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+          >
+            <AnimatePresence>
+              {filteredTemplates.map((template) => (
+                <TemplateCard key={template.id} template={template} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        ) : (
+          <div className="text-center py-20 bg-surface-container rounded-2xl border border-outline-variant/20">
+            <div className="w-20 h-20 bg-surface rounded-full flex items-center justify-center mx-auto mb-4 border border-outline-variant/20">
+              <span className="material-symbols-outlined text-outline text-3xl" data-icon="search_off">search_off</span>
+            </div>
+            <h3 className="text-xl font-bold text-on-surface mb-2">{t('catalog.no_results')}</h3>
+            <p className="text-on-surface-variant">{t('catalog.no_results_desc')}</p>
+            <button 
+              onClick={() => { setSearchQuery(''); handleCategoryChange('all'); }}
+              className="mt-6 text-primary font-semibold hover:underline"
+            >
+              {t('catalog.reset_filter')}
+            </button>
+          </div>
+        )}
 
       </div>
     </div>

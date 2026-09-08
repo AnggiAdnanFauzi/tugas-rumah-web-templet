@@ -1,111 +1,103 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Stethoscope, Menu, X } from 'lucide-react';
-import { clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-import { WA_LINK, SITE_CONFIG } from '../config/site';
-import { Button } from './common/Button';
-
-export function cn(...inputs) {
-  return twMerge(clsx(inputs));
-}
+import { WA_LINK } from '../config/site';
+import { useAppContext } from '../contexts/AppContext';
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { t, lang, toggleLang, isDark, toggleTheme } = useAppContext();
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Katalog', path: '/template' },
-    { name: 'Mengapa Kami', path: '/#mengapa-kami' },
-    { name: 'Harga', path: '/#harga' },
-    { name: 'Fitur', path: '/#fitur' },
-    { name: 'FAQ', path: '/#faq' },
+    { name: t('navbar.why_us'), path: '/#mengapa-kami' },
+    { name: t('navbar.template'), path: '/template' },
+    { name: t('navbar.pricing'), path: '/#harga' },
+    { name: t('navbar.features'), path: '/#fitur' },
+    { name: t('navbar.faq'), path: '/#faq' },
   ];
 
   return (
-    <nav className={cn(
-      'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-      isScrolled ? 'glass-panel py-2' : 'bg-transparent py-3'
-    )}>
-      <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="bg-primary p-1.5 rounded-lg text-primary-foreground group-hover:bg-secondary transition-colors">
-            <Stethoscope size={20} />
-          </div>
-          <span className="font-bold text-lg tracking-tight text-foreground">
-            {SITE_CONFIG.name.split(' ')[0]}
-            <span className="text-primary">{SITE_CONFIG.name.substring(SITE_CONFIG.name.indexOf(' '))}</span>
-          </span>
+    <nav className="bg-surface-container-lowest border-b border-outline-variant/20 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 h-20 flex items-center justify-between">
+        <Link to="/" className="flex items-center">
+          <img alt="HealthTemplate Hub Logo" className="w-auto object-contain h-16 md:h-20 transform scale-[1.35] md:scale-150 origin-left transition-all" src="/logos.png" />
         </Link>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-5">
-          <div className="flex gap-5 text-sm font-medium">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                to={link.path}
-                className={cn(
-                  "hover:text-primary transition-colors",
-                  location.pathname === link.path ? "text-primary font-semibold" : "text-muted-foreground"
-                )}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-          <Button 
-            href={WA_LINK('Halo, saya ingin konsultasi gratis pembuatan website kesehatan')}
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="primary"
-            size="sm"
-          >
-            Konsultasi Gratis
-          </Button>
+        
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => {
+             const isActive = location.pathname === link.path || location.hash === link.path.replace('/', '');
+             return (
+               <Link 
+                 key={link.name} 
+                 to={link.path}
+                 className={`text-sm font-semibold transition-colors ${isActive ? 'text-primary border-b-2 border-primary pb-1 pt-1 block' : 'text-on-surface-variant hover:text-primary block'}`}
+               >
+                 {link.name}
+               </Link>
+             )
+          })}
         </div>
+        
+        <div className="hidden md:flex items-center gap-4">
+          <button 
+            onClick={toggleTheme}
+            className="p-2 rounded-full text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors flex items-center justify-center"
+            title="Toggle Theme"
+          >
+            <span className="material-symbols-outlined text-[20px]">{isDark ? 'light_mode' : 'dark_mode'}</span>
+          </button>
+          
+          <button 
+            onClick={toggleLang}
+            className="flex items-center gap-1 font-bold text-sm px-3 py-1.5 rounded-full border border-outline-variant/30 text-on-surface hover:bg-surface-variant transition-colors"
+          >
+            <span className="material-symbols-outlined text-[16px]">language</span>
+            {lang.toUpperCase()}
+          </button>
 
-        {/* Mobile Menu Toggle */}
-        <button 
-          className="md:hidden text-slate-dark"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          <a className="bg-primary text-on-primary text-sm font-semibold py-2 px-5 rounded-full hover:bg-primary/90 transition-colors ml-2" href={WA_LINK('Halo, saya ingin konsultasi gratis pembuatan website kesehatan')} target="_blank" rel="noopener noreferrer">
+            {t('navbar.contact')}
+          </a>
+        </div>
+        
+        <div className="md:hidden flex items-center gap-2">
+          <button 
+            onClick={toggleTheme}
+            className="p-2 rounded-full text-on-surface-variant"
+          >
+            <span className="material-symbols-outlined">{isDark ? 'light_mode' : 'dark_mode'}</span>
+          </button>
+          <button 
+            onClick={toggleLang}
+            className="font-bold text-sm text-on-surface-variant px-2"
+          >
+            {lang.toUpperCase()}
+          </button>
+          <button 
+            className="text-on-surface p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <span className="material-symbols-outlined">{isMobileMenuOpen ? 'close' : 'menu'}</span>
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 glass-panel py-4 px-6 flex flex-col gap-4 border-t border-white/20">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-surface-container-lowest py-4 px-6 md:px-12 lg:px-16 flex flex-col gap-4 border-b border-outline-variant/20 shadow-lg">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
               to={link.path}
-              className="text-muted-foreground font-medium hover:text-primary"
+              className="text-on-surface-variant text-sm font-semibold hover:text-primary py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.name}
             </Link>
           ))}
-          <Button 
-            href={WA_LINK('Halo, saya ingin konsultasi gratis pembuatan website kesehatan')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full mt-2"
-            size="sm"
-          >
-            Konsultasi Gratis
-          </Button>
+          <a className="bg-primary text-on-primary text-sm font-semibold text-center py-2 rounded-full hover:bg-primary/90 transition-colors mt-2" href={WA_LINK('Halo, saya ingin konsultasi gratis pembuatan website kesehatan')} target="_blank" rel="noopener noreferrer">
+            {t('navbar.contact')}
+          </a>
         </div>
       )}
     </nav>
@@ -113,3 +105,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

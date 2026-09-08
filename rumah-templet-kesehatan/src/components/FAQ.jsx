@@ -1,111 +1,66 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-import { cn } from '../utils/cn';
+import { useAppContext } from '../contexts/AppContext';
 
 const faqs = [
   {
-    q: "Apakah saya perlu membeli hosting dan domain sendiri?",
-    a: "Tidak perlu pusing. Layanan kami sudah termasuk setup hosting dan domain (opsional), sehingga Anda terima beres."
+    q: "Apakah saya memerlukan keahlian coding?",
+    a: "Tidak sama sekali. Tim kami yang akan mengatur dan membangun website Anda. Anda hanya perlu menyediakan konten dan logo."
   },
   {
-    q: "Berapa lama waktu pembuatan website?",
-    a: "Karena menggunakan struktur template yang sudah teruji, website Anda bisa tayang dalam waktu 2-5 hari kerja setelah data (logo, teks, gambar) kami terima."
+    q: "Apakah harga sudah termasuk domain dan hosting?",
+    a: "Harga paket yang tertera adalah untuk pembuatan website (desain & struktur). Domain dan hosting bisa Anda sediakan sendiri, atau kami bantu kelola dengan biaya terpisah."
   },
   {
-    q: "Apakah template ini bisa diubah warnanya?",
-    a: "Tentu. Warna utama, logo, dan font akan disesuaikan dengan identitas brand fasilitas kesehatan Anda."
-  },
-  {
-    q: "Bagaimana sistem pembayaran integrasi WhatsApp?",
-    a: "Tidak ada biaya langganan gateway. Tombol pemesanan langsung mengarah ke aplikasi WhatsApp admin Anda dengan pesan yang sudah terformat otomatis."
+    q: "Berapa lama proses pengerjaannya?",
+    a: "Untuk paket Landing Page, estimasi 2-3 hari kerja. Sedangkan Company Profile memakan waktu sekitar 5-7 hari kerja setelah seluruh konten kami terima."
   }
 ];
 
 const FAQ = () => {
+  const { t } = useAppContext();
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="py-12 md:py-14 lg:py-16 bg-white" id="faq">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
-        <div className="text-center mb-8">
-          <motion.h2 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl md:text-3xl font-bold text-foreground mb-3"
-          >
-            Pertanyaan Umum
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-muted-foreground text-sm md:text-base"
-          >
-            Hal-hal yang sering ditanyakan sebelum memulai.
-          </motion.p>
-        </div>
+    <section className="py-20 relative overflow-hidden" id="faq">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 relative z-10">
+      <div className="text-center mb-16 reveal active">
+        <h2 className="font-bold text-2xl md:text-3xl text-gradient font-bold mb-4">{t('faq.title')}</h2>
+      </div>
 
-        <div className="space-y-3">
-          {faqs.map((faq, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 * idx }}
-              className={cn(
-                "border rounded-2xl overflow-hidden transition-colors duration-300",
-                openIndex === idx 
-                  ? "border-primary bg-primary/5" 
-                  : "border-border bg-white hover:border-primary/50"
-              )}
-            >
+      <div className="max-w-3xl mx-auto space-y-4 reveal active">
+        {faqs.map((faq, idx) => {
+          const isOpen = openIndex === idx;
+          return (
+            <div key={idx} className={`group glass-panel rounded-eight border border-white/60 transition-colors ${isOpen ? 'bg-primary/5' : ''}`}>
               <button 
-                className="w-full text-left px-5 py-4 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-2xl"
-                onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
-                aria-expanded={openIndex === idx}
+                className="w-full flex cursor-pointer items-center justify-between gap-1.5 p-6 text-on-surface font-bold font-bold text-lg text-left outline-none"
+                onClick={() => setOpenIndex(isOpen ? -1 : idx)}
               >
-                <span className={cn(
-                  "font-semibold pr-8 transition-colors duration-300",
-                  openIndex === idx ? "text-primary" : "text-foreground"
-                )}>
-                  {faq.q}
+                {faq.q}
+                <span className="relative size-5 shrink-0 flex items-center justify-center text-primary">
+                  <span className={`material-symbols-outlined absolute transition-transform duration-300 ${isOpen ? 'rotate-180 opacity-0' : 'rotate-0 opacity-100'}`}>add</span>
+                  <span className={`material-symbols-outlined absolute transition-transform duration-300 ${isOpen ? 'rotate-0 opacity-100' : '-rotate-180 opacity-0'}`}>remove</span>
                 </span>
-                <motion.div 
-                  animate={{ rotate: openIndex === idx ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className={cn(
-                    "flex-shrink-0 transition-colors duration-300",
-                    openIndex === idx ? "text-primary" : "text-muted-foreground"
-                  )}
-                >
-                  <ChevronDown size={20} />
-                </motion.div>
               </button>
               
-              <AnimatePresence>
-                {openIndex === idx && (
-                  <motion.div 
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  >
-                    <div className="px-5 pb-4 text-muted-foreground text-sm md:text-base leading-relaxed">
-                      {faq.a}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
-        </div>
+              <div 
+                className={`overflow-hidden transition-all duration-300 ease-in-out`}
+                style={{ maxHeight: isOpen ? '500px' : '0px', opacity: isOpen ? 1 : 0 }}
+              >
+                <div className="px-6 pb-6 text-on-surface-variant">
+                  {faq.a}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
       </div>
     </section>
   );
 };
 
 export default FAQ;
+
+
+
