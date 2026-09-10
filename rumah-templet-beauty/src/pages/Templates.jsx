@@ -4,7 +4,6 @@ import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { CatalogHero } from "../components/catalog/CatalogHero";
 import { CatalogFilter } from "../components/catalog/CatalogFilter";
-import { CatalogFeatured } from "../components/catalog/CatalogFeatured";
 import { CatalogGrid } from "../components/catalog/CatalogGrid";
 import { CatalogEmptyState } from "../components/catalog/CatalogEmptyState";
 import { CatalogCta } from "../components/catalog/CatalogCta";
@@ -89,11 +88,6 @@ export function Templates() {
           sortBy={sortBy}
           setSortBy={setSortBy}
         />
-        
-        {/* Only show featured if no active search, to keep it clean */}
-        {searchQuery === "" && (
-          <CatalogFeatured />
-        )}
         
         {filteredTemplates.length > 0 ? (
           <CatalogGrid templates={filteredTemplates} />
