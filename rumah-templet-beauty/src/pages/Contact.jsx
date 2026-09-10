@@ -9,8 +9,8 @@ import { Button } from "../components/ui/Button";
 // Basic config mockup
 const SITE_CONFIG = {
   name: "Rumah Web Template",
-  whatsappNumber: "6281234567890",
-  email: "hello@rumahwebtemplate.com"
+  whatsappNumber: "6287772577020",
+  email: "optibis.id@gmail.com"
 };
 
 const faqs = [
