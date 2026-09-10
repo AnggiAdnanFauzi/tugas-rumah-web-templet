@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Star, Eye } from "lucide-react";
 import { Badge } from "./Badge";
-import { Button } from "./Button";
+import { Button, buttonVariants } from "./Button";
 
 export function TemplateCard({ template, index }) {
   const item = {
@@ -39,23 +39,19 @@ export function TemplateCard({ template, index }) {
 
         {/* Hover Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:flex items-end justify-center pb-4 px-4 gap-2">
-          <Button 
-            variant="primary" 
-            as={Link} 
+          <Link 
             to={`/preview/${template.slug}`} 
-            className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 rounded-full shadow-beauty-md text-xs py-2 px-3.5 flex items-center gap-1.5"
+            className={buttonVariants({ variant: "primary", className: "translate-y-4 group-hover:translate-y-0 transition-transform duration-300 rounded-full shadow-beauty-md text-xs py-2 px-3.5 flex items-center gap-1.5" })}
           >
             <Eye className="w-3.5 h-3.5" />
             Live Preview
-          </Button>
-          <Button 
-            variant="outline" 
-            as={Link} 
+          </Link>
+          <Link 
             to={`/templates/${template.slug}`} 
-            className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 rounded-full bg-white/90 hover:bg-white text-beauty-foreground border-transparent text-xs py-2 px-3.5"
+            className={buttonVariants({ variant: "outline", className: "translate-y-4 group-hover:translate-y-0 transition-transform duration-300 rounded-full bg-white/90 hover:bg-white text-beauty-foreground border-transparent text-xs py-2 px-3.5" })}
           >
             Detail
-          </Button>
+          </Link>
         </div>
       </div>
 
@@ -91,9 +87,9 @@ export function TemplateCard({ template, index }) {
             >
               <Eye className="w-3.5 h-3.5" /> Preview
             </Link>
-            <Button variant="ghost" size="sm" as={Link} to={`/templates/${template.slug}`} className="p-0 hover:bg-transparent lg:hidden group/btn">
+            <Link to={`/templates/${template.slug}`} className={buttonVariants({ variant: "ghost", size: "sm", className: "p-0 hover:bg-transparent lg:hidden group/btn" })}>
               Detail <ArrowRight className="w-4 h-4 ml-1 transform group-hover/btn:translate-x-1 transition-transform" />
-            </Button>
+            </Link>
           </div>
         </div>
       </div>
