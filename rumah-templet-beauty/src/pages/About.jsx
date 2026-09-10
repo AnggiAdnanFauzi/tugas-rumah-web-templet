@@ -55,10 +55,10 @@ export function About() {
                 viewport={{ once: true }}
               >
                 <h1 className="text-3xl md:text-4xl font-bold text-beauty-foreground leading-tight mb-4">
-                  Template yang Membantu Brand Beauty Tampil Lebih Meyakinkan.
+                  Cerita Kami: Mengubah Wajah Digital Bisnis Kecantikan
                 </h1>
                 <p className="text-sm md:text-base text-beauty-muted mb-8 leading-relaxed max-w-md">
-                  Website siap pakai dengan desain premium untuk klinik kecantikan, salon, spa, skincare, dan bisnis beauty modern.
+                  Berawal dari passion untuk membantu para pelaku bisnis beauty, kami hadir sebagai mitra digital yang berdedikasi. Misi kami adalah memberdayakan salon, klinik, dan brand skincare agar bisa bersinar dengan identitas digital yang profesional dan elegan.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button as={Link} to="/templates" variant="primary" size="lg" className="rounded-full shadow-beauty-md">
@@ -128,14 +128,17 @@ export function About() {
                 className="order-1 lg:order-2"
               >
                 <h2 className="text-2xl md:text-3xl font-bold text-beauty-foreground mb-6 leading-tight">
-                  Kenapa Rumah Web Template Dibuat?
+                  Perjalanan Kami
                 </h2>
                 <div className="space-y-4 text-sm md:text-base text-beauty-muted leading-relaxed">
                   <p>
-                    Banyak bisnis kecantikan menyadari pentingnya tampil meyakinkan di ranah digital. Namun, membuat website kustom dari nol seringkali memakan waktu berbulan-bulan dan biaya yang tidak sedikit.
+                    Kami adalah sekumpulan desainer, developer, dan beauty enthusiast yang menyadari satu hal: banyak bisnis kecantikan luar biasa yang kesulitan menampilkan pesona mereka di dunia digital.
                   </p>
                   <p>
-                    Rumah Web Template hadir menjembatani celah tersebut. Kami merancang desain-desain premium yang spesifik difokuskan untuk industri kecantikan. Website yang bukan hanya indah dipandang, melainkan juga responsif, cepat disesuaikan, dan dirancang murni untuk mendorong konversi.
+                    Dengan pengalaman bertahun-tahun membantu brand besar, kami memutuskan untuk membawa standar premium tersebut ke semua pelaku bisnis kecantikan. Mulai dari klinik lokal hingga brand skincare yang baru merintis, kami ingin memastikan identitas digital Anda memancarkan keindahan yang sama dengan layanan Anda.
+                  </p>
+                  <p>
+                    Bagi kami, setiap detail warna, bentuk, dan kata di dalam website adalah representasi dari komitmen Anda terhadap pelanggan.
                   </p>
                 </div>
               </motion.div>
