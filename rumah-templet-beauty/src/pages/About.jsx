@@ -77,8 +77,8 @@ export function About() {
                 className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-beauty-md border border-beauty-border group"
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=1000" 
-                  alt="Beauty lifestyle"
+                  src="/about-hero.jpg" 
+                  alt="Laptop displaying beauty website"
                   className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
                 />
               </motion.div>
@@ -116,8 +116,8 @@ export function About() {
                 className="order-2 lg:order-1 relative rounded-2xl overflow-hidden aspect-[4/3] shadow-beauty-sm border border-beauty-border group"
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=1000" 
-                  alt="Premium beauty clinic interior"
+                  src="/about-journey.jpg" 
+                  alt="Digital journey 3D illustration"
                   className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
                 />
               </motion.div>
