@@ -32,9 +32,7 @@ export function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-beauty-primary to-beauty-secondary flex items-center justify-center text-white font-bold text-lg shadow-beauty-sm group-hover:scale-105 group-hover:shadow-beauty-md transition-all duration-300">
-                R
-              </div>
+              <img src="/logo.jpg" alt="Logo" className="w-8 h-8 rounded-full object-cover shadow-sm group-hover:scale-105 transition-transform" />
               <span className="font-semibold text-xl tracking-tight text-beauty-foreground">
                 RumahWebTemplate <span className="text-beauty-primary font-bold italic">Beauty</span>
               </span>

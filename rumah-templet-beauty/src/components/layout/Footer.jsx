@@ -10,9 +10,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <a href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-beauty-primary to-beauty-secondary flex items-center justify-center text-white font-bold text-lg shadow-sm">
-                R
-              </div>
+              <img src="/logo.jpg" alt="Logo" className="w-8 h-8 rounded-full object-cover shadow-sm" />
               <span className="font-semibold text-xl tracking-tight text-beauty-foreground">
                 RumahWebTemplate <span className="text-beauty-primary">Beauty</span>
               </span>
