@@ -8,12 +8,14 @@ import { Contact } from "./pages/Contact";
 import { NotFound } from "./pages/NotFound";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import { FloatingOrbs } from "./components/ui/Parallax";
+import { FloatingWhatsApp } from "./components/ui/FloatingWhatsApp";
 
 function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <FloatingOrbs />
+      <FloatingWhatsApp />
       <div className="relative z-0">
         <Routes>
           <Route path="/" element={<Home />} />

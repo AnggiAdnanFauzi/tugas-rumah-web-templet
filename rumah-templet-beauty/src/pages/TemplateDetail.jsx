@@ -11,7 +11,7 @@ import { templates } from "../data/templates";
 // Basic site config mockup since the user mentioned SITE_CONFIG
 const SITE_CONFIG = {
   name: "Rumah Web Template",
-  whatsappNumber: "6281234567890" // Placeholder
+  whatsappNumber: "6287772577020" // Optibis Contact
 };
 
 const WA_LINK = (templateName) => {
