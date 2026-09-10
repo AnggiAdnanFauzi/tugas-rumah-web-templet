@@ -14,12 +14,12 @@ export function Templates() {
   const [searchParams, setSearchParams] = useSearchParams();
   
   // State initialization from URL or Defaults
-  const initialCategory = searchParams.get("category") || "salon";
+  const initialCategory = searchParams.get("category") || "all";
   
-  // Verify if category is valid, if not, reset to salon
-  const isValidCategory = categories.some(cat => cat.name.toLowerCase().replace(/\s+/g, "-") === initialCategory);
+  // Verify if category is valid, if not, reset to all
+  const isValidCategory = initialCategory === "all" || categories.some(cat => cat.name.toLowerCase().replace(/\s+/g, "-") === initialCategory);
   
-  const [activeCategory, setActiveCategory] = useState(isValidCategory ? initialCategory : "salon");
+  const [activeCategory, setActiveCategory] = useState(isValidCategory ? initialCategory : "all");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("newest");
 
@@ -34,9 +34,11 @@ export function Templates() {
     let result = [...templates];
 
     // 1. Filter by Category
-    result = result.filter((t) => 
-      t.categoryName.toLowerCase().replace(/\s+/g, "-") === activeCategory
-    );
+    if (activeCategory !== "all") {
+      result = result.filter((t) => 
+        t.categoryName.toLowerCase().replace(/\s+/g, "-") === activeCategory
+      );
+    }
 
     // 2. Filter by Search Query
     if (searchQuery.trim() !== "") {
@@ -68,7 +70,7 @@ export function Templates() {
   }, [activeCategory, searchQuery, sortBy]);
 
   const handleReset = () => {
-    setActiveCategory("salon");
+    setActiveCategory("all");
     setSearchQuery("");
     setSortBy("newest");
   };
