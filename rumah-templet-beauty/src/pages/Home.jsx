@@ -7,10 +7,8 @@ import { FeaturedTemplates } from "../components/sections/FeaturedTemplates";
 import { WhyTheseTemplates } from "../components/sections/WhyTheseTemplates";
 import { EditorialShowcase } from "../components/sections/EditorialShowcase";
 import { WhatYouGet } from "../components/sections/WhatYouGet";
-import { TemplateDetailPreview } from "../components/sections/TemplateDetailPreview";
 import { BeforeAfter } from "../components/sections/BeforeAfter";
 import { CustomizationSection } from "../components/sections/CustomizationSection";
-import { BusinessUseCases } from "../components/sections/BusinessUseCases";
 import { UseCaseVisual } from "../components/sections/UseCaseVisual";
 import { PurchaseConfidence } from "../components/sections/PurchaseConfidence";
 import { MiniSocialProof } from "../components/sections/MiniSocialProof";
@@ -33,10 +31,8 @@ export function Home() {
 
         {/* Phase 6 Core - Conversion & Trust Funnel */}
         <WhatYouGet />
-        <TemplateDetailPreview />
         <BeforeAfter />
         <CustomizationSection />
-        <BusinessUseCases />
         <UseCaseVisual />
         <PurchaseConfidence />
         <MiniSocialProof />
