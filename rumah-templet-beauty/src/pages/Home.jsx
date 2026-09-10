@@ -2,14 +2,14 @@ import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { Hero } from "../components/sections/Hero";
 import { TrustStrip } from "../components/sections/TrustStrip";
-import { CategoryStrip } from "../components/sections/CategoryStrip";
-import { FeaturedTemplates } from "../components/sections/FeaturedTemplates";
+import { BeforeAfter } from "../components/sections/BeforeAfter";
+import { ConversionChartSection } from "../components/sections/ConversionChartSection";
 import { WhyTheseTemplates } from "../components/sections/WhyTheseTemplates";
+import { FeaturedTemplates } from "../components/sections/FeaturedTemplates";
+import { CategoryStrip } from "../components/sections/CategoryStrip";
 import { EditorialShowcase } from "../components/sections/EditorialShowcase";
 import { WhatYouGet } from "../components/sections/WhatYouGet";
-import { BeforeAfter } from "../components/sections/BeforeAfter";
 import { CustomizationSection } from "../components/sections/CustomizationSection";
-import { UseCaseVisual } from "../components/sections/UseCaseVisual";
 import { PurchaseConfidence } from "../components/sections/PurchaseConfidence";
 import { MiniSocialProof } from "../components/sections/MiniSocialProof";
 import { FaqConversion } from "../components/sections/FaqConversion";
@@ -21,22 +21,26 @@ export function Home() {
     <div className="min-h-screen bg-beauty-background font-sans flex flex-col">
       <Navbar />
       <main className="flex-grow pt-[72px]">
-        {/* Phase 5 Core - Foundation & Showcase */}
+        {/* Phase 1: First Impression & Problem Awareness */}
         <Hero />
         <TrustStrip />
-        <CategoryStrip />
-        <FeaturedTemplates />
+        <BeforeAfter />
+        <ConversionChartSection />
+
+        {/* Phase 2: Solution & Showcasing */}
         <WhyTheseTemplates />
+        <FeaturedTemplates />
+        <CategoryStrip />
         <EditorialShowcase />
 
-        {/* Phase 6 Core - Conversion & Trust Funnel */}
+        {/* Phase 3: Features & Objections */}
         <WhatYouGet />
-        <BeforeAfter />
         <CustomizationSection />
-        <UseCaseVisual />
         <PurchaseConfidence />
         <MiniSocialProof />
         <FaqConversion />
+        
+        {/* Phase 4: Final Call to Action */}
         <FinalCta />
         <ValueCta />
       </main>
