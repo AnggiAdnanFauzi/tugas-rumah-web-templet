@@ -72,7 +72,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="pt-8 border-t border-beauty-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-beauty-muted text-center md:text-left">
-            &copy; {new Date().getFullYear()} {siteConfig.name}. Hak Cipta Dilindungi oleh <a href="https://optibis.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-beauty-primary hover:underline">OPTIBIS</a>.
+            &copy; {new Date().getFullYear()} {siteConfig.name}. Hak Cipta Dilindungi oleh <a href="https://optibis.id" target="_blank" rel="noopener noreferrer" className="font-semibold text-beauty-primary hover:underline">OPTIBIS</a>.
           </p>
           <div className="flex gap-4">
             <span className="text-xs text-beauty-muted font-medium">Made with ❤️ for Beauty Brands</span>
