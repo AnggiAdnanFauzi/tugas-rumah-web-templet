@@ -34,7 +34,7 @@ export function Navbar() {
             <Link to="/" className="flex items-center gap-2.5 group">
               <img src="/logo.jpg" alt="Logo" className="w-8 h-8 rounded-full object-cover shadow-sm group-hover:scale-105 transition-transform" />
               <span className="font-semibold text-xl tracking-tight text-beauty-foreground">
-                OPTIBIS
+                RumahWebTemplate <span className="text-beauty-primary font-bold italic">Beauty</span>
               </span>
             </Link>
           </div>

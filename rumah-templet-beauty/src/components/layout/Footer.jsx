@@ -12,7 +12,7 @@ export function Footer() {
             <a href="/" className="flex items-center gap-2 mb-6">
               <img src="/logo.jpg" alt="Logo" className="w-8 h-8 rounded-full object-cover shadow-sm" />
               <span className="font-semibold text-xl tracking-tight text-beauty-foreground">
-                OPTIBIS
+                RumahWebTemplate <span className="text-beauty-primary">Beauty</span>
               </span>
             </a>
             <p className="text-sm text-beauty-muted max-w-sm mb-6 leading-relaxed">
@@ -72,7 +72,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="pt-8 border-t border-beauty-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-beauty-muted text-center md:text-left">
-            &copy; {new Date().getFullYear()} {siteConfig.name}. Hak Cipta Dilindungi.
+            &copy; {new Date().getFullYear()} {siteConfig.name}. Hak Cipta Dilindungi oleh <a href="https://optibis.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-beauty-primary hover:underline">OPTIBIS</a>.
           </p>
           <div className="flex gap-4">
             <span className="text-xs text-beauty-muted font-medium">Made with ❤️ for Beauty Brands</span>
