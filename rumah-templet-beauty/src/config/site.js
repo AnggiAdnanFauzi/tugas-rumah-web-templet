@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "RumahWebTemplate Beauty",
+  name: "OPTIBIS",
   description: "Marketplace template website premium untuk klinik kecantikan, salon, dan brand skincare.",
   mainNav: [
     { title: "Home", href: "/" },

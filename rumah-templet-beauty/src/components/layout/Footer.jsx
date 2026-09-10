@@ -12,7 +12,7 @@ export function Footer() {
             <a href="/" className="flex items-center gap-2 mb-6">
               <img src="/logo.jpg" alt="Logo" className="w-8 h-8 rounded-full object-cover shadow-sm" />
               <span className="font-semibold text-xl tracking-tight text-beauty-foreground">
-                RumahWebTemplate <span className="text-beauty-primary">Beauty</span>
+                OPTIBIS
               </span>
             </a>
             <p className="text-sm text-beauty-muted max-w-sm mb-6 leading-relaxed">
