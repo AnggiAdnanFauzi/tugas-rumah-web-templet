@@ -77,18 +77,15 @@ export function TemplateCard({ template, index }) {
 
         {/* Footer */}
         <div className="flex items-center justify-between pt-4 border-t border-beauty-border mt-auto">
-          <span className="font-semibold text-beauty-foreground text-sm">
-            Rp {template.price.toLocaleString("id-ID")}
-          </span>
+          <Link to={`/templates/${template.slug}`} className="text-sm font-bold text-beauty-primary hover:text-beauty-accent flex items-center gap-1 group/btn">
+            Lihat Detail <ArrowRight className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" />
+          </Link>
           <div className="flex items-center gap-2">
             <Link 
               to={`/preview/${template.slug}`} 
-              className="text-xs text-beauty-primary font-medium hover:underline flex items-center gap-1 lg:hidden"
+              className="text-xs text-beauty-muted hover:text-beauty-foreground font-medium flex items-center gap-1 lg:hidden"
             >
               <Eye className="w-3.5 h-3.5" /> Preview
-            </Link>
-            <Link to={`/templates/${template.slug}`} className={buttonVariants({ variant: "ghost", size: "sm", className: "p-0 hover:bg-transparent lg:hidden group/btn" })}>
-              Detail <ArrowRight className="w-4 h-4 ml-1 transform group-hover/btn:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
