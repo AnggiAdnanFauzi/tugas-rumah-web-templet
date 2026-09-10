@@ -15,16 +15,6 @@ export function CatalogFilter({
         
         {/* Categories (Horizontal Scroll on Mobile) */}
         <div className="flex overflow-x-auto pb-4 mb-4 gap-2 scrollbar-hide no-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
-          <button
-            onClick={() => setActiveCategory("all")}
-            className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              activeCategory === "all" 
-                ? "bg-beauty-primary text-white" 
-                : "bg-beauty-surface text-beauty-muted hover:text-beauty-foreground hover:bg-beauty-border/50 border border-beauty-border"
-            }`}
-          >
-            All Templates
-          </button>
           {categories.map((cat) => (
             <button
               key={cat.id}

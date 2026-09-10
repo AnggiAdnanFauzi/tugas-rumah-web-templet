@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Star } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Star, Eye } from "lucide-react";
 import { Badge } from "./Badge";
 import { Button } from "./Button";
 
@@ -30,10 +31,30 @@ export function TemplateCard({ template, index }) {
           {template.isNew && <Badge variant="new">New</Badge>}
         </div>
 
+        {template.demoUrl && (
+          <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-xs text-white text-[11px] font-medium px-2.5 py-0.5 rounded-full border border-white/20">
+            Live Preview
+          </div>
+        )}
+
         {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:flex items-end justify-center pb-4">
-          <Button variant="primary" as="a" href={`/templates/${template.slug}`} className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 rounded-full shadow-beauty-md text-sm">
-            Preview Template
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:flex items-end justify-center pb-4 px-4 gap-2">
+          <Button 
+            variant="primary" 
+            as={Link} 
+            to={`/preview/${template.slug}`} 
+            className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 rounded-full shadow-beauty-md text-xs py-2 px-3.5 flex items-center gap-1.5"
+          >
+            <Eye className="w-3.5 h-3.5" />
+            Live Preview
+          </Button>
+          <Button 
+            variant="outline" 
+            as={Link} 
+            to={`/templates/${template.slug}`} 
+            className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 rounded-full bg-white/90 hover:bg-white text-beauty-foreground border-transparent text-xs py-2 px-3.5"
+          >
+            Detail
           </Button>
         </div>
       </div>
@@ -49,7 +70,9 @@ export function TemplateCard({ template, index }) {
         </div>
         
         <h3 className="text-lg font-bold text-beauty-foreground mb-2 group-hover:text-beauty-primary transition-colors">
-          {template.title}
+          <Link to={`/templates/${template.slug}`}>
+            {template.title}
+          </Link>
         </h3>
         
         <p className="text-sm text-beauty-muted line-clamp-2 mb-4 flex-grow">
@@ -58,12 +81,20 @@ export function TemplateCard({ template, index }) {
 
         {/* Footer */}
         <div className="flex items-center justify-between pt-4 border-t border-beauty-border mt-auto">
-          <span className="font-semibold text-beauty-foreground">
+          <span className="font-semibold text-beauty-foreground text-sm">
             Rp {template.price.toLocaleString("id-ID")}
           </span>
-          <Button variant="ghost" size="sm" as="a" href={`/templates/${template.slug}`} className="p-0 hover:bg-transparent lg:hidden group/btn">
-            Detail <ArrowRight className="w-4 h-4 ml-1 transform group-hover/btn:translate-x-1 transition-transform" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <Link 
+              to={`/preview/${template.slug}`} 
+              className="text-xs text-beauty-primary font-medium hover:underline flex items-center gap-1 lg:hidden"
+            >
+              <Eye className="w-3.5 h-3.5" /> Preview
+            </Link>
+            <Button variant="ghost" size="sm" as={Link} to={`/templates/${template.slug}`} className="p-0 hover:bg-transparent lg:hidden group/btn">
+              Detail <ArrowRight className="w-4 h-4 ml-1 transform group-hover/btn:translate-x-1 transition-transform" />
+            </Button>
+          </div>
         </div>
       </div>
     </motion.div>

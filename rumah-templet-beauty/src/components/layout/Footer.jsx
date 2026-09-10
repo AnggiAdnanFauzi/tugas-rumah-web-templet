@@ -51,10 +51,9 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-beauty-foreground mb-4">Kategori</h3>
             <ul className="space-y-3">
-              <li><a href="/templates?category=salon" className="text-sm text-beauty-muted hover:text-beauty-primary transition-colors">Salon & Hair Studio</a></li>
-              <li><a href="/templates?category=beauty-clinic" className="text-sm text-beauty-muted hover:text-beauty-primary transition-colors">Klinik Kecantikan</a></li>
-              <li><a href="/templates?category=skincare" className="text-sm text-beauty-muted hover:text-beauty-primary transition-colors">Brand Skincare</a></li>
-              <li><a href="/templates?category=spa-wellness" className="text-sm text-beauty-muted hover:text-beauty-primary transition-colors">Spa & Wellness</a></li>
+              <li><a href="/templates?category=salon" className="text-sm text-beauty-muted hover:text-beauty-primary transition-colors">Salon & Studio</a></li>
+              <li><a href="/templates?category=skincare" className="text-sm text-beauty-muted hover:text-beauty-primary transition-colors">Skincare & Klinik</a></li>
+              <li><a href="/templates?category=spa" className="text-sm text-beauty-muted hover:text-beauty-primary transition-colors">Spa & Wellness</a></li>
             </ul>
           </div>
 

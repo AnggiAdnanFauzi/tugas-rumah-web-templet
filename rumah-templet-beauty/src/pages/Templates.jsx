@@ -15,22 +15,18 @@ export function Templates() {
   const [searchParams, setSearchParams] = useSearchParams();
   
   // State initialization from URL or Defaults
-  const initialCategory = searchParams.get("category") || "all";
+  const initialCategory = searchParams.get("category") || "salon";
   
-  // Verify if category is valid, if not, reset to all
-  const isValidCategory = initialCategory === "all" || categories.some(cat => cat.name.toLowerCase().replace(/\s+/g, "-") === initialCategory);
+  // Verify if category is valid, if not, reset to salon
+  const isValidCategory = categories.some(cat => cat.name.toLowerCase().replace(/\s+/g, "-") === initialCategory);
   
-  const [activeCategory, setActiveCategory] = useState(isValidCategory ? initialCategory : "all");
+  const [activeCategory, setActiveCategory] = useState(isValidCategory ? initialCategory : "salon");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("newest");
 
   // Sync category to URL
   useEffect(() => {
-    if (activeCategory === "all") {
-      searchParams.delete("category");
-    } else {
-      searchParams.set("category", activeCategory);
-    }
+    searchParams.set("category", activeCategory);
     setSearchParams(searchParams);
   }, [activeCategory, searchParams, setSearchParams]);
 
@@ -39,11 +35,9 @@ export function Templates() {
     let result = [...templates];
 
     // 1. Filter by Category
-    if (activeCategory !== "all") {
-      result = result.filter((t) => 
-        t.categoryName.toLowerCase().replace(/\s+/g, "-") === activeCategory
-      );
-    }
+    result = result.filter((t) => 
+      t.categoryName.toLowerCase().replace(/\s+/g, "-") === activeCategory
+    );
 
     // 2. Filter by Search Query
     if (searchQuery.trim() !== "") {
@@ -75,7 +69,7 @@ export function Templates() {
   }, [activeCategory, searchQuery, sortBy]);
 
   const handleReset = () => {
-    setActiveCategory("all");
+    setActiveCategory("salon");
     setSearchQuery("");
     setSortBy("newest");
   };
@@ -96,8 +90,8 @@ export function Templates() {
           setSortBy={setSortBy}
         />
         
-        {/* Only show featured if no active search/category, to keep it clean, or always show it? Prompt says "Sebelum grid utama, tampilkan area visual kecil: Template Pilihan". Let's show it only on "all" and no search, to avoid confusion. */}
-        {activeCategory === "all" && searchQuery === "" && (
+        {/* Only show featured if no active search, to keep it clean */}
+        {searchQuery === "" && (
           <CatalogFeatured />
         )}
         

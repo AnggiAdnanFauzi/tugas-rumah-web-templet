@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { categories } from "../../data/categories";
 
@@ -36,7 +37,7 @@ export function BusinessUseCases() {
             transition={{ delay: 0.1 }}
             className="text-sm md:text-base text-beauty-muted"
           >
-            Satu fondasi fleksibel yang dioptimalkan khusus untuk memenuhi kebutuhan berbagai model bisnis kecantikan.
+            Satu fondasi fleksibel yang dioptimalkan khusus untuk memenuhi kebutuhan salon, skincare, dan spa.
           </motion.p>
         </div>
 
@@ -45,16 +46,20 @@ export function BusinessUseCases() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-5"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
         >
           {categories.map((cat) => {
             return (
-              <motion.a 
-                href={`/templates?category=${cat.name.toLowerCase().replace(/\s+/g, "-")}`}
+              <motion.div
                 key={cat.id} 
                 variants={item}
-                className="group relative flex flex-col rounded-2xl overflow-hidden bg-beauty-background border border-beauty-border shadow-beauty-sm aspect-[4/5] hover:shadow-beauty-md transition-shadow"
+                className="group relative flex flex-col rounded-2xl overflow-hidden bg-beauty-background border border-beauty-border shadow-beauty-sm aspect-[4/3] hover:shadow-beauty-md transition-shadow"
               >
+                <Link
+                  to={`/templates?category=${cat.name.toLowerCase().replace(/\s+/g, "-")}`}
+                  className="absolute inset-0 z-20"
+                  aria-label={`Lihat template ${cat.name}`}
+                />
                 <div className="absolute inset-0 z-0">
                   <motion.img 
                     whileHover={{ scale: 1.05 }}
@@ -74,7 +79,7 @@ export function BusinessUseCases() {
                     Lihat Template <ArrowRight className="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
-              </motion.a>
+              </motion.div>
             );
           })}
         </motion.div>

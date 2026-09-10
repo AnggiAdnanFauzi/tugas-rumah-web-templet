@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { templates } from "../../data/templates";
 
@@ -41,13 +42,21 @@ export function CatalogFeatured() {
               "Elegant digital experience for modern beauty businesses."
             </p>
             
-            <a 
-              href={`/templates/${featured.slug}`}
-              className="group inline-flex items-center justify-center gap-2 bg-beauty-foreground text-white px-6 py-3 rounded-full text-sm font-bold transition-all hover:bg-beauty-foreground/90 w-full md:w-auto mt-auto md:mt-0"
-            >
-              View Template
-              <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-            </a>
+            <div className="flex flex-wrap items-center gap-3 mt-auto md:mt-0">
+              <Link 
+                to={`/preview/${featured.slug}`}
+                className="group inline-flex items-center justify-center gap-2 bg-beauty-primary text-white px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all hover:bg-beauty-primary-hover shadow-beauty-sm"
+              >
+                Live Preview
+                <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link 
+                to={`/templates/${featured.slug}`}
+                className="inline-flex items-center justify-center gap-2 bg-beauty-foreground text-white px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all hover:bg-beauty-foreground/90"
+              >
+                Detail
+              </Link>
+            </div>
           </div>
         </motion.div>
 

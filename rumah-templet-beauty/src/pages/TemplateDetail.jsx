@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronRight, SearchX, CheckCircle2, ArrowRight, Star } from "lucide-react";
+import { ChevronRight, SearchX, CheckCircle2, ArrowRight, Star, Eye, ExternalLink } from "lucide-react";
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { Button } from "../components/ui/Button";
@@ -97,6 +97,27 @@ export function TemplateDetail() {
                   alt={`Preview of ${template.title}`}
                   className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
                 />
+
+                {/* Hover overlay with quick preview link */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <Button
+                    as={Link}
+                    to={`/preview/${template.slug}`}
+                    variant="primary"
+                    size="default"
+                    className="rounded-full shadow-beauty-lg flex items-center gap-2"
+                  >
+                    <Eye className="w-4 h-4" />
+                    Buka Live Preview
+                  </Button>
+                </div>
+
+                {template.demoUrl && (
+                  <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-xs text-beauty-foreground text-xs font-semibold px-3 py-1 rounded-full border border-beauty-border shadow-sm flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Live Preview Siap
+                  </div>
+                )}
               </motion.div>
 
               {/* Product Info (Right) */}
@@ -132,40 +153,55 @@ export function TemplateDetail() {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-                  <Button 
-                    as="a" 
-                    href={WA_LINK(template.title)} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    variant="primary" 
-                    size="lg" 
-                    className="rounded-full shadow-beauty-md w-full sm:flex-1"
-                  >
-                    Gunakan Template Ini
-                  </Button>
-                  
-                  {template.demoUrl ? (
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                     <Button 
                       as="a" 
-                      href={template.demoUrl} 
-                      target="_blank"
+                      href={WA_LINK(template.title)} 
+                      target="_blank" 
                       rel="noopener noreferrer"
-                      variant="outline" 
+                      variant="primary" 
                       size="lg" 
-                      className="rounded-full w-full sm:flex-1"
+                      className="rounded-full shadow-beauty-md w-full sm:flex-1"
                     >
-                      Lihat Demo
+                      Gunakan Template Ini
                     </Button>
-                  ) : (
-                    <Button 
-                      disabled
-                      variant="outline" 
-                      size="lg" 
-                      className="rounded-full w-full sm:flex-1 opacity-60 cursor-not-allowed"
-                    >
-                      Demo Segera Hadir
-                    </Button>
+                    
+                    {template.demoUrl ? (
+                      <Button 
+                        as={Link} 
+                        to={`/preview/${template.slug}`}
+                        variant="outline" 
+                        size="lg" 
+                        className="rounded-full w-full sm:flex-1 flex items-center justify-center gap-2"
+                      >
+                        <Eye className="w-4 h-4 text-beauty-primary" />
+                        Live Preview
+                      </Button>
+                    ) : (
+                      <Button 
+                        disabled
+                        variant="outline" 
+                        size="lg" 
+                        className="rounded-full w-full sm:flex-1 opacity-60 cursor-not-allowed"
+                      >
+                        Demo Segera Hadir
+                      </Button>
+                    )}
+                  </div>
+
+                  {template.demoUrl && (
+                    <div className="pt-2">
+                      <a
+                        href={template.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs text-beauty-muted hover:text-beauty-primary font-medium transition-colors"
+                      >
+                        <span>Buka template langsung di tab baru ({template.demoUrl.replace('https://', '')})</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
                   )}
                 </div>
               </motion.div>

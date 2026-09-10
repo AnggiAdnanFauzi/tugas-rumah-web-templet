@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { categories } from "../../data/categories";
 
 export function CategoryStrip() {
@@ -6,13 +7,15 @@ export function CategoryStrip() {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 },
+      transition: {
+        staggerChildren: 0.1,
+      },
     },
   };
 
   const item = {
-    hidden: { opacity: 0, scale: 0.95, y: 10 },
-    show: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.4 } },
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
@@ -20,14 +23,23 @@ export function CategoryStrip() {
       <div className="beauty-container">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
+        <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-xs font-bold uppercase tracking-wider text-beauty-primary mb-2"
+          >
+            Kategori Utama
+          </motion.p>
           <motion.h2 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ delay: 0.05 }}
             className="text-2xl md:text-3xl font-bold text-beauty-foreground mb-3"
           >
-            Template untuk Setiap Bisnis Beauty
+            Eksplorasi Berdasarkan Industri Beauty
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 10 }}
@@ -36,7 +48,7 @@ export function CategoryStrip() {
             transition={{ delay: 0.1 }}
             className="text-sm md:text-base text-beauty-muted"
           >
-            Mulai dari salon hingga skincare, pilih tampilan yang paling sesuai dengan karakter brand Anda.
+            Pilih katalog template yang dirancang khusus untuk salon, skincare, atau spa relaksasi Anda.
           </motion.p>
         </div>
 
@@ -46,17 +58,21 @@ export function CategoryStrip() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
         >
           {categories.map((category) => {
             const Icon = category.icon;
             return (
-              <motion.a
+              <motion.div
                 key={category.id}
                 variants={item}
-                href={`/templates?category=${category.name.toLowerCase().replace(/\s+/g, "-")}`}
-                className="group relative flex flex-col aspect-[4/5] overflow-hidden rounded-2xl bg-beauty-background cursor-pointer"
+                className="group relative flex flex-col aspect-[4/3] overflow-hidden rounded-2xl bg-beauty-background cursor-pointer shadow-beauty-sm hover:shadow-beauty-md transition-shadow"
               >
+                <Link
+                  to={`/templates?category=${category.name.toLowerCase().replace(/\s+/g, "-")}`}
+                  className="absolute inset-0 z-20"
+                  aria-label={`Lihat kategori ${category.name}`}
+                />
                 {/* Background Image */}
                 <img 
                   src={category.image} 
@@ -79,7 +95,7 @@ export function CategoryStrip() {
                     {category.description}
                   </p>
                 </div>
-              </motion.a>
+              </motion.div>
             );
           })}
         </motion.div>

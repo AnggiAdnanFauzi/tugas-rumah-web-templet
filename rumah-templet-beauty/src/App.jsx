@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Templates } from "./pages/Templates";
 import { TemplateDetail } from "./pages/TemplateDetail";
+import { TemplatePreview } from "./pages/TemplatePreview";
 import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import { NotFound } from "./pages/NotFound";
@@ -18,6 +19,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/templates" element={<Templates />} />
           <Route path="/templates/:slug" element={<TemplateDetail />} />
+          <Route path="/templates/:slug/preview" element={<TemplatePreview />} />
+          <Route path="/preview/:slug" element={<TemplatePreview />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
